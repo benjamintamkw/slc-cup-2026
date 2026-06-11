@@ -442,17 +442,18 @@ table.standings td:first-child{text-align:left;}
     <div class="card">
       <div class="card-label">⚙️ Team names</div>
       <div class="admin-grid" style="margin-bottom:8px">
-        <div class="admin-field"><label>Team A</label><input type="text" id="admin-nameA" placeholder="Fellowship A" oninput="saveTeamNames()"></div>
-        <div class="admin-field"><label>Team B</label><input type="text" id="admin-nameB" placeholder="Fellowship B" oninput="saveTeamNames()"></div>
-        <div class="admin-field"><label>Team C</label><input type="text" id="admin-nameC" placeholder="Fellowship C" oninput="saveTeamNames()"></div>
-        <div class="admin-field"><label>Team D</label><input type="text" id="admin-nameD" placeholder="Fellowship D" oninput="saveTeamNames()"></div>
+        <div class="admin-field"><label>Team A</label><input type="text" id="admin-nameA" placeholder="Fellowship A"></div>
+        <div class="admin-field"><label>Team B</label><input type="text" id="admin-nameB" placeholder="Fellowship B"></div>
+        <div class="admin-field"><label>Team C</label><input type="text" id="admin-nameC" placeholder="Fellowship C"></div>
+        <div class="admin-field"><label>Team D</label><input type="text" id="admin-nameD" placeholder="Fellowship D"></div>
       </div>
-      <div class="admin-grid">
-        <div class="admin-field"><label>Mix 1</label><input type="text" id="admin-nameM1" placeholder="Mix 1" oninput="saveTeamNames()"></div>
-        <div class="admin-field"><label>Mix 2</label><input type="text" id="admin-nameM2" placeholder="Mix 2" oninput="saveTeamNames()"></div>
-        <div class="admin-field"><label>Mix 3</label><input type="text" id="admin-nameM3" placeholder="Mix 3" oninput="saveTeamNames()"></div>
-        <div class="admin-field"><label>Mix 4</label><input type="text" id="admin-nameM4" placeholder="Mix 4" oninput="saveTeamNames()"></div>
+      <div class="admin-grid" style="margin-bottom:12px">
+        <div class="admin-field"><label>Mix 1</label><input type="text" id="admin-nameM1" placeholder="Mix 1"></div>
+        <div class="admin-field"><label>Mix 2</label><input type="text" id="admin-nameM2" placeholder="Mix 2"></div>
+        <div class="admin-field"><label>Mix 3</label><input type="text" id="admin-nameM3" placeholder="Mix 3"></div>
+        <div class="admin-field"><label>Mix 4</label><input type="text" id="admin-nameM4" placeholder="Mix 4"></div>
       </div>
+      <button class="btn btn-gold" style="width:100%" onclick="saveTeamNames()">💾 Save team names</button>
     </div>
     <div class="card">
       <div class="card-label">⚽ Update scores</div>
@@ -522,15 +523,20 @@ window.showPage = function(id, btn) {
 window.checkPin = function() {
   const pin = document.getElementById('pin-input').value;
   if(pin === ADMIN_PIN) {
-    document.getElementById('admin-lock').style.display='none';
-    document.getElementById('admin-panel').style.display='block';
-    renderAdminScores();
-    renderAdminBoot();
-    loadTeamNamesToAdmin();
+    sessionStorage.setItem('slc_admin','1');
+    unlockAdmin();
   } else {
     showToast('Wrong PIN','red');
   }
 };
+
+function unlockAdmin() {
+  document.getElementById('admin-lock').style.display='none';
+  document.getElementById('admin-panel').style.display='block';
+  renderAdminScores();
+  renderAdminBoot();
+  loadTeamNamesToAdmin();
+}
 
 function tn(t){ return state.teams[t] || t; }
 
@@ -566,7 +572,7 @@ async function saveScore(matchId, home, away) {
   showToast('Score saved ✓');
 }
 
-window.saveTeamNames = function() {
+window.saveTeamNames = async function() {
   const names = {
     A: document.getElementById('admin-nameA').value || 'Team A',
     B: document.getElementById('admin-nameB').value || 'Team B',
@@ -578,9 +584,11 @@ window.saveTeamNames = function() {
     M4: document.getElementById('admin-nameM4').value || 'Mix 4',
   };
   state.teams = names;
-  sb.from('settings').upsert({key:'teams',value:JSON.stringify(names)},{onConflict:'key'});
+  const {error} = await sb.from('settings').upsert({key:'teams',value:JSON.stringify(names)},{onConflict:'key'});
+  if(error) { showToast('Save failed — check Supabase','red'); return; }
   renderAll();
   renderAdminBoot();
+  showToast('Team names saved ✓');
 };
 
 function loadTeamNamesToAdmin() {
@@ -952,6 +960,11 @@ window.deleteScorer = async function(id) {
 // Realtime subscription
 sb.channel('scores').on('postgres_changes',{event:'*',schema:'public',table:'scores'},()=>loadData()).subscribe();
 sb.channel('scorers').on('postgres_changes',{event:'*',schema:'public',table:'scorers'},()=>loadData()).subscribe();
+
+// Restore admin session after refresh
+if(sessionStorage.getItem('slc_admin')==='1') {
+  unlockAdmin();
+}
 
 loadData();
 </script>
