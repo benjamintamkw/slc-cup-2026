@@ -168,6 +168,17 @@ table.standings td:first-child{text-align:left;}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;}
 .empty-state{text-align:center;color:var(--muted);padding:30px;font-size:13px;}
 .section-label{font-size:12px;font-weight:600;color:var(--gold);margin:16px 0 8px;letter-spacing:.04em;}
+
+/* INLINE EDITING */
+.editable{cursor:default;border-radius:4px;transition:background .15s;}
+body.admin-mode .editable{cursor:pointer;outline:1px dashed rgba(245,158,11,.35);outline-offset:2px;}
+body.admin-mode .editable:hover{background:rgba(245,158,11,.08);}
+body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(245,158,11,.12);cursor:text;}
+.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:12px 20px;display:none;align-items:center;justify-content:space-between;z-index:200;gap:12px;}
+.save-bar.visible{display:flex;}
+.save-bar-msg{font-size:12px;color:var(--muted);}
+.save-bar-msg span{color:var(--gold);font-weight:600;}
+.save-bar-btns{display:flex;gap:8px;}
 </style>
 </head>
 <body>
@@ -191,12 +202,20 @@ table.standings td:first-child{text-align:left;}
 
 <div id="toast" class="toast"></div>
 
+<div class="save-bar" id="save-bar">
+  <div class="save-bar-msg">✏️ <span id="unsaved-count">0</span> unsaved changes</div>
+  <div class="save-bar-btns">
+    <button class="btn btn-surface" onclick="discardEdits()">Discard</button>
+    <button class="btn btn-gold" onclick="saveAllEdits()">💾 Save all</button>
+  </div>
+</div>
+
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="hero">
     <span class="hero-icon">⚽</span>
     <h1>Singapore Life Church <span>Cup 2026</span></h1>
-    <p>19 July 2026 · Two tournaments · One unforgettable day</p>
+    <p class="editable" contenteditable="false" data-key="home_tagline">19 July 2026 · Two tournaments · One unforgettable day</p>
     <div class="hero-badges">
       <span class="badge badge-gold">🏆 SLC Cup</span>
       <span class="badge badge-purple">🔀 Mixed Cup</span>
@@ -206,12 +225,12 @@ table.standings td:first-child{text-align:left;}
   </div>
   <div class="card">
     <div class="card-label">📅 The day</div>
-    <div class="rule-row"><span class="rule-icon">⚽</span><div class="rule-text"><strong>2:30pm</strong> — Futsal tournament begins (2 courts, 5-a-side)</div></div>
-    <div class="rule-row"><span class="rule-icon">🏆</span><div class="rule-text"><strong>3:22pm</strong> — SLC Cup knockouts</div></div>
-    <div class="rule-row"><span class="rule-icon">🔀</span><div class="rule-text"><strong>3:58pm</strong> — Mixed Cup begins</div></div>
-    <div class="rule-row"><span class="rule-icon">🥇</span><div class="rule-text"><strong>4:30pm</strong> — Trophy presentation</div></div>
-    <div class="rule-row"><span class="rule-icon">🍜</span><div class="rule-text"><strong>Evening</strong> — Dinner, fellowship & sleepover at church</div></div>
-    <div class="rule-row"><span class="rule-icon">📺</span><div class="rule-text"><strong>3:00am (Mon 20 Jul)</strong> — World Cup Final live on Channel 5</div></div>
+    <div class="rule-row"><span class="rule-icon">⚽</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t1">2:30pm</strong> — <span class="editable" contenteditable="false" data-key="home_t1b">Futsal tournament begins (2 courts, 5-a-side)</span></div></div>
+    <div class="rule-row"><span class="rule-icon">🏆</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t2">3:22pm</strong> — <span class="editable" contenteditable="false" data-key="home_t2b">SLC Cup knockouts</span></div></div>
+    <div class="rule-row"><span class="rule-icon">🔀</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t3">3:58pm</strong> — <span class="editable" contenteditable="false" data-key="home_t3b">Mixed Cup begins</span></div></div>
+    <div class="rule-row"><span class="rule-icon">🥇</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t4">4:30pm</strong> — <span class="editable" contenteditable="false" data-key="home_t4b">Trophy presentation</span></div></div>
+    <div class="rule-row"><span class="rule-icon">🍜</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t5">Evening</strong> — <span class="editable" contenteditable="false" data-key="home_t5b">Dinner, fellowship & sleepover at church</span></div></div>
+    <div class="rule-row"><span class="rule-icon">📺</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t6">3:00am (Mon 20 Jul)</strong> — <span class="editable" contenteditable="false" data-key="home_t6b">World Cup Final live on Channel 5</span></div></div>
   </div>
 </div>
 
@@ -221,35 +240,35 @@ table.standings td:first-child{text-align:left;}
     <div class="card-label">📅 Full day schedule — 19–20 July 2026</div>
     <div class="schedule-block">
       <h3>🏆 SLC Cup — Round Robin (2:30–3:22pm)</h3>
-      <div class="sched-row"><div class="sched-time">2:30pm</div><div class="sched-content"><div class="sched-title">Warmup + opening prayer + draw</div><div class="sched-sub">Both courts</div></div></div>
-      <div class="sched-row"><div class="sched-time">2:40pm</div><div class="sched-content"><div class="sched-title">Match 1 <span class="court-pill c1">C1</span> + Match 2 <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-m1"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time">2:52pm</div><div class="sched-content"><div class="sched-title">Match 3 <span class="court-pill c1">C1</span> + Match 4 <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-m3"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time">3:04pm</div><div class="sched-content"><div class="sched-title">Match 5 <span class="court-pill c1">C1</span> + Match 6 <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-m5"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time">3:16pm</div><div class="sched-content"><div class="sched-title">Standings announced + mixed team draw</div><div class="sched-sub">6 min break</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_s1_time">2:30pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_s1_title">Warmup + opening prayer + draw</div><div class="sched-sub editable" contenteditable="false" data-key="sch_s1_sub">Both courts</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_s2_time">2:40pm</div><div class="sched-content"><div class="sched-title">Match 1 <span class="court-pill c1">C1</span> + Match 2 <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-m1"></span></div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_s3_time">2:52pm</div><div class="sched-content"><div class="sched-title">Match 3 <span class="court-pill c1">C1</span> + Match 4 <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-m3"></span></div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_s4_time">3:04pm</div><div class="sched-content"><div class="sched-title">Match 5 <span class="court-pill c1">C1</span> + Match 6 <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-m5"></span></div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_s5_time">3:16pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_s5_title">Standings announced + mixed team draw</div><div class="sched-sub editable" contenteditable="false" data-key="sch_s5_sub">6 min break</div></div></div>
     </div>
     <div class="schedule-block">
       <h3>🏆 SLC Cup — Knockouts (3:22–3:58pm)</h3>
-      <div class="sched-row"><div class="sched-time">3:22pm</div><div class="sched-content"><div class="sched-title">SF1 <span class="court-pill c1">C1</span> + SF2 <span class="court-pill c2">C2</span></div><div class="sched-sub">1st vs 4th · 2nd vs 3rd — simultaneously</div></div></div>
-      <div class="sched-row"><div class="sched-time">3:34pm</div><div class="sched-content"><div class="sched-title">Break + finalists prep</div></div></div>
-      <div class="sched-row"><div class="sched-time">3:46pm</div><div class="sched-content"><div class="sched-title">SLC Cup Final <span class="court-pill c1">C1</span> + 3rd place <span class="court-pill c2">C2</span></div><div class="sched-sub">Simultaneously</div></div></div>
-      <div class="sched-row"><div class="sched-time">3:58pm</div><div class="sched-content"><div class="sched-title">🏆 SLC Cup champion crowned!</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_k1_time">3:22pm</div><div class="sched-content"><div class="sched-title">SF1 <span class="court-pill c1">C1</span> + SF2 <span class="court-pill c2">C2</span></div><div class="sched-sub editable" contenteditable="false" data-key="sch_k1_sub">1st vs 4th · 2nd vs 3rd — simultaneously</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_k2_time">3:34pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_k2_title">Break + finalists prep</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_k3_time">3:46pm</div><div class="sched-content"><div class="sched-title">SLC Cup Final <span class="court-pill c1">C1</span> + 3rd place <span class="court-pill c2">C2</span></div><div class="sched-sub editable" contenteditable="false" data-key="sch_k3_sub">Simultaneously</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_k4_time">3:58pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_k4_title">🏆 SLC Cup champion crowned!</div></div></div>
     </div>
     <div class="schedule-block">
       <h3>🔀 Mixed Cup (3:58–4:30pm)</h3>
-      <div class="sched-row"><div class="sched-time">3:58pm</div><div class="sched-content"><div class="sched-title">Mixed SF1 <span class="court-pill c1">C1</span> + Mixed SF2 <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-msf"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time">4:10pm</div><div class="sched-content"><div class="sched-title">Break + finalists prep</div></div></div>
-      <div class="sched-row"><div class="sched-time">4:18pm</div><div class="sched-content"><div class="sched-title">Mixed Cup Final <span class="court-pill c1">C1</span> + 3rd place <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-mfin"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time">4:30pm</div><div class="sched-content"><div class="sched-title">🔀 Mixed Cup champion crowned!</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m1_time">3:58pm</div><div class="sched-content"><div class="sched-title">Mixed SF1 <span class="court-pill c1">C1</span> + Mixed SF2 <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-msf"></span></div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m2_time">4:10pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_m2_title">Break + finalists prep</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m3_time">4:18pm</div><div class="sched-content"><div class="sched-title">Mixed Cup Final <span class="court-pill c1">C1</span> + 3rd place <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-mfin"></span></div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m4_time">4:30pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_m4_title">🔀 Mixed Cup champion crowned!</div></div></div>
     </div>
     <div class="schedule-block">
       <h3>🥇 Trophy Presentation + Evening (4:30pm onwards)</h3>
-      <div class="sched-row"><div class="sched-time">4:30pm</div><div class="sched-content"><div class="sched-title">All 4 awards + group photo + closing prayer</div></div></div>
-      <div class="sched-row"><div class="sched-time">5:00pm</div><div class="sched-content"><div class="sched-title">Head home for dinner</div><div class="sched-sub">Families with kids — go home, rest, get kids settled</div></div></div>
-      <div class="sched-row"><div class="sched-time">8:00pm</div><div class="sched-content"><div class="sched-title">Return to church — sleepover begins</div><div class="sched-sub">Sleeping bags, snacks, games, projector setup</div></div></div>
-      <div class="sched-row"><div class="sched-time">9:00pm</div><div class="sched-content"><div class="sched-title">Fellowship sharing + devotion</div></div></div>
-      <div class="sched-row"><div class="sched-time">11:30pm</div><div class="sched-content"><div class="sched-title">Pre-match build-up on Channel 5</div></div></div>
-      <div class="sched-row"><div class="sched-time">3:00am</div><div class="sched-content"><div class="sched-title">📺 FIFA World Cup Final — KICKOFF!</div><div class="sched-sub">Free on Mediacorp Channel 5 · Mon 20 Jul</div></div></div>
-      <div class="sched-row"><div class="sched-time">~5:15am</div><div class="sched-content"><div class="sched-title">Full time + closing prayer + breakfast</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e1_time">4:30pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e1_title">All 4 awards + group photo + closing prayer</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e2_time">5:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e2_title">Head home for dinner</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e2_sub">Families with kids — go home, rest, get kids settled</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e3_time">8:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e3_title">Return to church — sleepover begins</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e3_sub">Sleeping bags, snacks, games, projector setup</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e4_time">9:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e4_title">Fellowship sharing + devotion</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e5_time">11:30pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e5_title">Pre-match build-up on Channel 5</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e6_time">3:00am</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e6_title">📺 FIFA World Cup Final — KICKOFF!</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e6_sub">Free on Mediacorp Channel 5 · Mon 20 Jul</div></div></div>
+      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e7_time">~5:15am</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e7_title">Full time + closing prayer + breakfast</div></div></div>
     </div>
   </div>
 </div>
@@ -377,42 +396,42 @@ table.standings td:first-child{text-align:left;}
     <div class="card-label">📋 Rules & regulations</div>
     <div class="rule-section">
       <h3>⚽ General rules</h3>
-      <div class="rule-row"><span class="rule-icon">👕</span><div class="rule-text"><strong>5-a-side</strong> — 5 players on pitch per team. Rolling subs, unlimited.</div></div>
-      <div class="rule-row"><span class="rule-icon">⏱</span><div class="rule-text"><strong>12-minute games</strong> — straight time, no stoppage time. Referee's whistle is final.</div></div>
-      <div class="rule-row"><span class="rule-icon">👧</span><div class="rule-text"><strong>Mixed gender</strong> — at least 2 female players on pitch at all times.</div></div>
-      <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text"><strong>No sliding tackles</strong> — safety first. Sliding = free kick.</div></div>
-      <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text"><strong>No heading</strong> — reduces collision risk on small courts.</div></div>
-      <div class="rule-row"><span class="rule-icon">🦶</span><div class="rule-text"><strong>Kick-ins</strong> instead of throw-ins. Ball stationary, taken within 5 seconds.</div></div>
-      <div class="rule-row"><span class="rule-icon">5️⃣</span><div class="rule-text"><strong>5-second rule</strong> on all restarts — kick-ins, corners, goal kicks, keeper distribution.</div></div>
-      <div class="rule-row"><span class="rule-icon">🧤</span><div class="rule-text"><strong>Goalkeeper</strong> — no punting. Rolling or throwing only. Cannot be scored on directly from a kick-in.</div></div>
-      <div class="rule-row"><span class="rule-icon">🟨</span><div class="rule-text"><strong>Yellow card</strong> — 2-minute sin bin, team plays short.</div></div>
-      <div class="rule-row"><span class="rule-icon">🟥</span><div class="rule-text"><strong>Red card</strong> — player out for the rest of the tournament. No replacement.</div></div>
-      <div class="rule-row"><span class="rule-icon">✝️</span><div class="rule-text"><strong>Spirit of the game</strong> — we play to honour God. Respect opponents, referees and teammates. Arguing with the referee = yellow card.</div></div>
+      <div class="rule-row"><span class="rule-icon">👕</span><div class="rule-text editable" contenteditable="false" data-key="rule_1"><strong>5-a-side</strong> — 5 players on pitch per team. Rolling subs, unlimited.</div></div>
+      <div class="rule-row"><span class="rule-icon">⏱</span><div class="rule-text editable" contenteditable="false" data-key="rule_2"><strong>12-minute games</strong> — straight time, no stoppage time. Referee's whistle is final.</div></div>
+      <div class="rule-row"><span class="rule-icon">👧</span><div class="rule-text editable" contenteditable="false" data-key="rule_3"><strong>Mixed gender</strong> — at least 2 female players on pitch at all times.</div></div>
+      <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text editable" contenteditable="false" data-key="rule_4"><strong>No sliding tackles</strong> — safety first. Sliding = free kick.</div></div>
+      <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text editable" contenteditable="false" data-key="rule_5"><strong>No heading</strong> — reduces collision risk on small courts.</div></div>
+      <div class="rule-row"><span class="rule-icon">🦶</span><div class="rule-text editable" contenteditable="false" data-key="rule_6"><strong>Kick-ins</strong> instead of throw-ins. Ball stationary, taken within 5 seconds.</div></div>
+      <div class="rule-row"><span class="rule-icon">5️⃣</span><div class="rule-text editable" contenteditable="false" data-key="rule_7"><strong>5-second rule</strong> on all restarts — kick-ins, corners, goal kicks, keeper distribution.</div></div>
+      <div class="rule-row"><span class="rule-icon">🧤</span><div class="rule-text editable" contenteditable="false" data-key="rule_8"><strong>Goalkeeper</strong> — no punting. Rolling or throwing only. Cannot be scored on directly from a kick-in.</div></div>
+      <div class="rule-row"><span class="rule-icon">🟨</span><div class="rule-text editable" contenteditable="false" data-key="rule_9"><strong>Yellow card</strong> — 2-minute sin bin, team plays short.</div></div>
+      <div class="rule-row"><span class="rule-icon">🟥</span><div class="rule-text editable" contenteditable="false" data-key="rule_10"><strong>Red card</strong> — player out for the rest of the tournament. No replacement.</div></div>
+      <div class="rule-row"><span class="rule-icon">✝️</span><div class="rule-text editable" contenteditable="false" data-key="rule_11"><strong>Spirit of the game</strong> — we play to honour God. Respect opponents, referees and teammates. Arguing with the referee = yellow card.</div></div>
     </div>
     <div class="rule-section">
       <h3>📊 Points system</h3>
-      <div class="rule-row"><span class="rule-icon">✅</span><div class="rule-text"><strong>Win</strong> = 3 points</div></div>
-      <div class="rule-row"><span class="rule-icon">🤝</span><div class="rule-text"><strong>Draw</strong> = 1 point each</div></div>
-      <div class="rule-row"><span class="rule-icon">❌</span><div class="rule-text"><strong>Loss</strong> = 0 points</div></div>
-      <div class="rule-row"><span class="rule-icon">📊</span><div class="rule-text"><strong>Tiebreaker:</strong> Goal difference → Goals scored → Head-to-head → Penalty shootout</div></div>
+      <div class="rule-row"><span class="rule-icon">✅</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts1"><strong>Win</strong> = 3 points</div></div>
+      <div class="rule-row"><span class="rule-icon">🤝</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts2"><strong>Draw</strong> = 1 point each</div></div>
+      <div class="rule-row"><span class="rule-icon">❌</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts3"><strong>Loss</strong> = 0 points</div></div>
+      <div class="rule-row"><span class="rule-icon">📊</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts4"><strong>Tiebreaker:</strong> Goal difference → Goals scored → Head-to-head → Penalty shootout</div></div>
     </div>
     <div class="rule-section">
       <h3>⚡ Knockout rules</h3>
-      <div class="rule-row"><span class="rule-icon">🎯</span><div class="rule-text"><strong>If level after 12 mins</strong> — straight to penalties. No extra time.</div></div>
-      <div class="rule-row"><span class="rule-icon">🎯</span><div class="rule-text"><strong>Shootout</strong> — 3 kicks each, alternating. Sudden death if still level.</div></div>
+      <div class="rule-row"><span class="rule-icon">🎯</span><div class="rule-text editable" contenteditable="false" data-key="rule_ko1"><strong>If level after 12 mins</strong> — straight to penalties. No extra time.</div></div>
+      <div class="rule-row"><span class="rule-icon">🎯</span><div class="rule-text editable" contenteditable="false" data-key="rule_ko2"><strong>Shootout</strong> — 3 kicks each, alternating. Sudden death if still level.</div></div>
     </div>
     <div class="rule-section">
       <h3>🔀 Mixed Cup draw</h3>
-      <div class="rule-row"><span class="rule-icon">🎲</span><div class="rule-text">Players randomly drawn into 4 new teams after the SLC Cup group stage.</div></div>
-      <div class="rule-row"><span class="rule-icon">🧩</span><div class="rule-text">Each mixed team must have players from <strong>at least 2 different fellowships</strong>.</div></div>
-      <div class="rule-row"><span class="rule-icon">⚖️</span><div class="rule-text">Draw master ensures gender balance across all 4 teams.</div></div>
+      <div class="rule-row"><span class="rule-icon">🎲</span><div class="rule-text editable" contenteditable="false" data-key="rule_mx1">Players randomly drawn into 4 new teams after the SLC Cup group stage.</div></div>
+      <div class="rule-row"><span class="rule-icon">🧩</span><div class="rule-text editable" contenteditable="false" data-key="rule_mx2">Each mixed team must have players from <strong>at least 2 different fellowships</strong>.</div></div>
+      <div class="rule-row"><span class="rule-icon">⚖️</span><div class="rule-text editable" contenteditable="false" data-key="rule_mx3">Draw master ensures gender balance across all 4 teams.</div></div>
     </div>
     <div class="rule-section">
       <h3>🏅 Awards</h3>
-      <div class="rule-row"><span class="rule-icon">🏆</span><div class="rule-text"><strong>SLC Cup</strong> — winners of the interfellowship knockout final.</div></div>
-      <div class="rule-row"><span class="rule-icon">🔀</span><div class="rule-text"><strong>Mixed Cup</strong> — winners of the mixed fellowship knockout final.</div></div>
-      <div class="rule-row"><span class="rule-icon">👟</span><div class="rule-text"><strong>Golden Boot</strong> — top scorer across both tournaments.</div></div>
-      <div class="rule-row"><span class="rule-icon">✝️</span><div class="rule-text"><strong>Servant Heart Award</strong> — voted by all players. Most Christlike player of the day.</div></div>
+      <div class="rule-row"><span class="rule-icon">🏆</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw1"><strong>SLC Cup</strong> — winners of the interfellowship knockout final.</div></div>
+      <div class="rule-row"><span class="rule-icon">🔀</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw2"><strong>Mixed Cup</strong> — winners of the mixed fellowship knockout final.</div></div>
+      <div class="rule-row"><span class="rule-icon">👟</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw3"><strong>Golden Boot</strong> — top scorer across both tournaments.</div></div>
+      <div class="rule-row"><span class="rule-icon">✝️</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw4"><strong>Servant Heart Award</strong> — voted by all players. Most Christlike player of the day.</div></div>
     </div>
   </div>
 </div>
@@ -449,11 +468,11 @@ table.standings td:first-child{text-align:left;}
     </div>
     <div class="card">
       <div class="card-label">💰 Budget — admin only</div>
-      <div class="rule-row"><span class="rule-icon">🏟</span><div class="rule-text">2x 5v5 courts × 2hrs — <strong>$320</strong></div></div>
-      <div class="rule-row"><span class="rule-icon">🥇</span><div class="rule-text">Trophies & medals — <strong>$150</strong></div></div>
-      <div class="rule-row"><span class="rule-icon">🎁</span><div class="rule-text">Prizes — <strong>$80</strong></div></div>
-      <div class="rule-row"><span class="rule-icon">🍱</span><div class="rule-text">Food & drinks — <strong>$200</strong></div></div>
-      <div class="rule-row"><span class="rule-icon">💵</span><div class="rule-text">Total <strong>$750</strong> · Split 5 fellowships = <strong>$150 each</strong></div></div>
+      <div class="rule-row"><span class="rule-icon">🏟</span><div class="rule-text editable" contenteditable="false" data-key="budget_1">2x 5v5 courts × 2hrs — <strong>$320</strong></div></div>
+      <div class="rule-row"><span class="rule-icon">🥇</span><div class="rule-text editable" contenteditable="false" data-key="budget_2">Trophies & medals — <strong>$150</strong></div></div>
+      <div class="rule-row"><span class="rule-icon">🎁</span><div class="rule-text editable" contenteditable="false" data-key="budget_3">Prizes — <strong>$80</strong></div></div>
+      <div class="rule-row"><span class="rule-icon">🍱</span><div class="rule-text editable" contenteditable="false" data-key="budget_4">Food & drinks — <strong>$200</strong></div></div>
+      <div class="rule-row"><span class="rule-icon">💵</span><div class="rule-text editable" contenteditable="false" data-key="budget_5">Total <strong>$750</strong> · Split 5 fellowships = <strong>$150 each</strong></div></div>
     </div>
     <div class="card">
       <div class="card-label">⚽ Update scores</div>
@@ -536,6 +555,71 @@ function unlockAdmin() {
   renderAdminScores();
   renderAdminBoot();
   loadTeamNamesToAdmin();
+  enableInlineEditing();
+}
+
+// ── INLINE EDITING ENGINE ──
+let pendingEdits = {}; // key → new value
+let contentCache = {}; // key → original loaded value
+
+function enableInlineEditing() {
+  document.body.classList.add('admin-mode');
+  document.querySelectorAll('.editable').forEach(el => {
+    el.contentEditable = 'true';
+    el.addEventListener('input', () => onEdit(el));
+    el.addEventListener('keydown', e => { if(e.key==='Enter'){ e.preventDefault(); el.blur(); } });
+  });
+}
+
+function disableInlineEditing() {
+  document.body.classList.remove('admin-mode');
+  document.querySelectorAll('.editable').forEach(el => {
+    el.contentEditable = 'false';
+  });
+}
+
+function onEdit(el) {
+  const key = el.dataset.key;
+  const val = el.innerHTML;
+  pendingEdits[key] = val;
+  updateSaveBar();
+}
+
+function updateSaveBar() {
+  const count = Object.keys(pendingEdits).length;
+  const bar = document.getElementById('save-bar');
+  const counter = document.getElementById('unsaved-count');
+  if(count > 0) {
+    bar.classList.add('visible');
+    counter.textContent = count;
+  } else {
+    bar.classList.remove('visible');
+  }
+}
+
+window.saveAllEdits = async function() {
+  if(Object.keys(pendingEdits).length === 0) return;
+  const merged = {...(state.content||{}), ...pendingEdits};
+  const {error} = await sb.from('settings').upsert({key:'content', value:JSON.stringify(merged)},{onConflict:'key'});
+  if(error){ showToast('Save failed','red'); return; }
+  state.content = merged;
+  pendingEdits = {};
+  updateSaveBar();
+  showToast('All changes saved ✓');
+};
+
+window.discardEdits = function() {
+  if(!confirm('Discard all unsaved changes?')) return;
+  pendingEdits = {};
+  updateSaveBar();
+  applyContent(state.content||{});
+};
+
+function applyContent(content) {
+  document.querySelectorAll('.editable[data-key]').forEach(el => {
+    const key = el.dataset.key;
+    if(content[key] !== undefined) el.innerHTML = content[key];
+  });
 }
 
 function tn(t){ return state.teams[t] || t; }
@@ -550,10 +634,11 @@ function showToast(msg, color='green') {
 }
 
 async function loadData() {
-  const [scoresRes, scorersRes, teamsRes] = await Promise.all([
+  const [scoresRes, scorersRes, teamsRes, contentRes] = await Promise.all([
     sb.from('scores').select('*'),
     sb.from('scorers').select('*').order('goals',{ascending:false}),
-    sb.from('settings').select('*').eq('key','teams').single()
+    sb.from('settings').select('*').eq('key','teams').single(),
+    sb.from('settings').select('*').eq('key','content').single()
   ]);
   if(scoresRes.data) {
     state.scores = {};
@@ -561,6 +646,10 @@ async function loadData() {
   }
   if(scorersRes.data) state.scorers = scorersRes.data;
   if(teamsRes.data?.value) state.teams = {...state.teams, ...JSON.parse(teamsRes.data.value)};
+  if(contentRes.data?.value) {
+    state.content = JSON.parse(contentRes.data.value);
+    applyContent(state.content);
+  }
   renderAll();
   loadTeamNamesToAdmin();
 }
