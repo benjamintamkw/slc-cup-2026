@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Singapore Life Church Cup 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@500&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0f0f0f;--surface:#1a1a1a;--surface2:#242424;--border:#2e2e2e;
+  --text:#f0efe9;--muted:#6b6a66;
+  --green:#22c55e;--green-bg:rgba(34,197,94,.12);
+  --gold:#f59e0b;--gold-bg:rgba(245,158,11,.12);
+  --blue:#60a5fa;--blue-bg:rgba(96,165,250,.12);
+  --purple:#a78bfa;--purple-bg:rgba(167,139,250,.12);
+  --red:#f87171;--red-bg:rgba(248,113,113,.12);
+  --r:12px;--rs:8px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* NAV */
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100;}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:0;}
+.nav-logo{padding:14px 0;font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;margin-right:20px;}
+.nav-logo span{color:var(--gold);}
+.nav-tabs{display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{padding:14px 12px;font-size:12px;font-weight:500;color:var(--muted);border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* LAYOUT */
+.page{display:none;max-width:900px;margin:0 auto;padding:20px 16px 60px;}
+.page.active{display:block;}
+
+/* HERO */
+.hero{text-align:center;padding:32px 16px 24px;background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border-radius:var(--r);border:1px solid var(--border);margin-bottom:16px;}
+.hero-icon{font-size:48px;margin-bottom:12px;display:block;}
+.hero h1{font-size:22px;font-weight:700;margin-bottom:4px;}
+.hero h1 span{color:var(--gold);}
+.hero p{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.hero-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.badge-gold{background:var(--gold-bg);color:var(--gold);}
+.badge-blue{background:var(--blue-bg);color:var(--blue);}
+.badge-purple{background:var(--purple-bg);color:var(--purple);}
+.badge-green{background:var(--green-bg);color:var(--green);}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px;}
+.card-label{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:6px;}
+
+/* SCHEDULE */
+.schedule-block{margin-bottom:20px;}
+.schedule-block h3{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.sched-row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.sched-row:last-child{border-bottom:none;}
+.sched-time{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);min-width:80px;padding-top:1px;}
+.sched-content{flex:1;}
+.sched-title{font-size:13px;font-weight:500;color:var(--text);}
+.sched-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.court-pill{display:inline-block;font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;}
+.c1{background:var(--blue-bg);color:var(--blue);}
+.c2{background:var(--purple-bg);color:var(--purple);}
+
+/* STANDINGS TABLE */
+table.standings{width:100%;border-collapse:collapse;font-size:12px;}
+table.standings th{font-size:10px;font-weight:600;color:var(--muted);text-align:center;padding:7px 3px;border-bottom:1px solid var(--border);letter-spacing:.04em;}
+table.standings th:first-child{text-align:left;}
+table.standings td{text-align:center;padding:9px 3px;border-bottom:1px solid var(--border);font-size:12px;}
+table.standings tr:last-child td{border-bottom:none;}
+table.standings td:first-child{text-align:left;}
+.pos{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:10px;font-weight:600;margin-right:5px;}
+.pos-1{background:var(--gold-bg);color:var(--gold);}
+.pos-2,.pos-3,.pos-4{background:var(--surface2);color:var(--muted);}
+.pts{font-weight:600;color:var(--blue);font-family:'DM Mono',monospace;}
+.gd-pos{color:var(--green);font-family:'DM Mono',monospace;}
+.gd-neg{color:var(--red);font-family:'DM Mono',monospace;}
+.gd-zero{color:var(--muted);font-family:'DM Mono',monospace;}
+
+/* MATCH CARDS */
+.match-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;margin-bottom:8px;}
+.match-card.live{border-color:var(--green);box-shadow:0 0 0 1px var(--green-bg);}
+.match-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.match-badge{font-size:10px;font-weight:600;color:var(--muted);}
+.match-live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.match-teams{display:flex;align-items:center;gap:8px;}
+.match-team{flex:1;font-size:13px;font-weight:500;text-align:center;}
+.match-score{display:flex;align-items:center;gap:6px;min-width:60px;justify-content:center;}
+.score-num{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;color:var(--text);}
+.score-sep{color:var(--muted);font-size:14px;}
+.score-tbd{font-family:'DM Mono',monospace;font-size:14px;color:var(--muted);}
+
+/* BRACKET */
+.bracket-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.bk-match{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);overflow:hidden;}
+.bk-match.final{border-color:var(--gold);}
+.bk-match.mixed-final{border-color:var(--purple);}
+.bk-header{font-size:10px;font-weight:600;color:var(--muted);padding:6px 10px;background:var(--surface);border-bottom:1px solid var(--border);}
+.bk-match.final .bk-header{color:var(--gold);}
+.bk-match.mixed-final .bk-header{color:var(--purple);}
+.bk-team{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid var(--border);}
+.bk-team:last-child{border-bottom:none;}
+.bk-team.winner{background:var(--green-bg);}
+.bk-team.winner .bk-name{color:var(--green);}
+.bk-name{font-size:12px;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bk-score{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--text);min-width:16px;text-align:right;}
+
+/* CHAMPION BANNER */
+.champ-banner{background:var(--gold-bg);border:1px solid var(--gold);border-radius:var(--r);padding:20px;text-align:center;margin-top:12px;display:none;}
+.champ-banner.purple{background:var(--purple-bg);border-color:var(--purple);}
+.champ-banner .icon{font-size:32px;display:block;margin-bottom:8px;}
+.champ-banner .label{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);}
+.champ-banner.purple .label{color:var(--purple);}
+.champ-banner .name{font-size:22px;font-weight:700;margin-top:4px;}
+
+/* GOLDEN BOOT */
+.gb-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);}
+.gb-row:last-child{border-bottom:none;}
+.gb-row.leader{background:var(--gold-bg);margin:0 -16px;padding:9px 16px;border-radius:var(--rs);}
+.gb-rank{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);min-width:22px;text-align:center;}
+.gb-row.leader .gb-rank{color:var(--gold);}
+.gb-info{flex:1;min-width:0;}
+.gb-name{font-size:13px;font-weight:500;}
+.gb-team{font-size:11px;color:var(--muted);margin-top:1px;}
+.gb-goals{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--text);}
+.gb-row.leader .gb-goals{color:var(--gold);}
+
+/* RULES */
+.rule-section{margin-bottom:20px;}
+.rule-section h3{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.rule-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);}
+.rule-row:last-child{border-bottom:none;}
+.rule-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+.rule-text{font-size:13px;color:var(--text);line-height:1.5;}
+.rule-text strong{font-weight:600;}
+
+/* ADMIN */
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.admin-field label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;}
+.admin-field input{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--surface2);color:var(--text);outline:none;}
+.admin-field input:focus{border-color:var(--gold);}
+.btn{padding:9px 16px;border:none;border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s;}
+.btn:active{opacity:.8;}
+.btn-gold{background:var(--gold);color:#000;}
+.btn-surface{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red);}
+.match-admin{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:12px;margin-bottom:8px;}
+.match-admin-header{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.match-admin-teams{display:flex;align-items:center;gap:8px;}
+.match-admin-team{flex:1;font-size:12px;font-weight:500;text-align:center;}
+.score-inputs{display:flex;align-items:center;gap:6px;}
+.score-inputs input{width:40px;height:36px;text-align:center;font-family:'DM Mono',monospace;font-size:16px;border:1px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--text);outline:none;}
+.score-inputs input:focus{border-color:var(--gold);}
+.score-inputs span{color:var(--muted);}
+.save-btn{padding:6px 12px;background:var(--gold);color:#000;border:none;border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.save-btn:active{opacity:.8;}
+.section-divider{font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;padding:10px 0 6px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green);color:#000;padding:10px 20px;border-radius:30px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;}
+.toast.show{opacity:1;}
+.admin-lock{text-align:center;padding:40px 20px;}
+.admin-lock p{font-size:13px;color:var(--muted);margin-bottom:16px;}
+.pin-input{width:160px;padding:10px;text-align:center;font-size:20px;letter-spacing:.3em;border:1px solid var(--border);border-radius:var(--rs);background:var(--surface2);color:var(--text);outline:none;font-family:'DM Mono',monospace;}
+.pin-input:focus{border-color:var(--gold);}
+.live-indicator{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green);}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;}
+.empty-state{text-align:center;color:var(--muted);padding:30px;font-size:13px;}
+.section-label{font-size:12px;font-weight:600;color:var(--gold);margin:16px 0 8px;letter-spacing:.04em;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">⚽ <span>SLC</span> Cup</div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showPage('home',this)">Home</button>
+      <button class="nav-tab" onclick="showPage('schedule',this)">Schedule</button>
+      <button class="nav-tab" onclick="showPage('scores',this)">Scores</button>
+      <button class="nav-tab" onclick="showPage('table',this)">Table</button>
+      <button class="nav-tab" onclick="showPage('slccup',this)">🏆 SLC Cup</button>
+      <button class="nav-tab" onclick="showPage('mixed',this)">🔀 Mixed</button>
+      <button class="nav-tab" onclick="showPage('boot',this)">👟 Boot</button>
+      <button class="nav-tab" onclick="showPage('rules',this)">Rules</button>
+      <button class="nav-tab" onclick="showPage('admin',this)">Admin</button>
+    </div>
+  </div>
+</nav>
+
+<div id="toast" class="toast"></div>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <span class="hero-icon">⚽</span>
+    <h1>Singapore Life Church <span>Cup 2026</span></h1>
+    <p>19 July 2026 · Two tournaments · One unforgettable day</p>
+    <div class="hero-badges">
+      <span class="badge badge-gold">🏆 SLC Cup</span>
+      <span class="badge badge-purple">🔀 Mixed Cup</span>
+      <span class="badge badge-blue">📺 World Cup Final Watch Party</span>
+      <span class="badge badge-green">✝️ Playing for His glory</span>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">📅 The day</div>
+    <div class="rule-row"><span class="rule-icon">⚽</span><div class="rule-text"><strong>2:30pm</strong> — Futsal tournament begins (2 courts, 5-a-side)</div></div>
+    <div class="rule-row"><span class="rule-icon">🏆</span><div class="rule-text"><strong>3:22pm</strong> — SLC Cup knockouts</div></div>
+    <div class="rule-row"><span class="rule-icon">🔀</span><div class="rule-text"><strong>3:58pm</strong> — Mixed Cup begins</div></div>
+    <div class="rule-row"><span class="rule-icon">🥇</span><div class="rule-text"><strong>4:30pm</strong> — Trophy presentation</div></div>
+    <div class="rule-row"><span class="rule-icon">🍜</span><div class="rule-text"><strong>Evening</strong> — Dinner, fellowship & sleepover at church</div></div>
+    <div class="rule-row"><span class="rule-icon">📺</span><div class="rule-text"><strong>3:00am (Mon 20 Jul)</strong> — World Cup Final live on Channel 5</div></div>
+  </div>
+  <div class="card">
+    <div class="card-label">💰 Budget</div>
+    <div class="rule-row"><span class="rule-icon">🏟</span><div class="rule-text">2x 5v5 courts × 2hrs — <strong>$320</strong></div></div>
+    <div class="rule-row"><span class="rule-icon">🥇</span><div class="rule-text">Trophies & medals — <strong>$150</strong></div></div>
+    <div class="rule-row"><span class="rule-icon">🎁</span><div class="rule-text">Prizes — <strong>$80</strong></div></div>
+    <div class="rule-row"><span class="rule-icon">🍱</span><div class="rule-text">Food & drinks — <strong>$200</strong></div></div>
+    <div class="rule-row"><span class="rule-icon">💵</span><div class="rule-text">Total <strong>$750</strong> · Split 5 fellowships = <strong>$150 each</strong></div></div>
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<div class="page" id="page-schedule">
+  <div class="card">
+    <div class="card-label">📅 Full day schedule — 19–20 July 2026</div>
+    <div class="schedule-block">
+      <h3>🏆 SLC Cup — Round Robin (2:30–3:22pm)</h3>
+      <div class="sched-row"><div class="sched-time">2:30pm</div><div class="sched-content"><div class="sched-title">Warmup + opening prayer + draw</div><div class="sched-sub">Both courts</div></div></div>
+      <div class="sched-row"><div class="sched-time">2:40pm</div><div class="sched-content"><div class="sched-title">Match 1 + Match 2 <span class="court-pill c1">C1</span><span class="court-pill c2">C2</span></div><div class="sched-sub">A vs B · C vs D</div></div></div>
+      <div class="sched-row"><div class="sched-time">2:52pm</div><div class="sched-content"><div class="sched-title">Match 3 + Match 4 <span class="court-pill c1">C1</span><span class="court-pill c2">C2</span></div><div class="sched-sub">A vs C · B vs D</div></div></div>
+      <div class="sched-row"><div class="sched-time">3:04pm</div><div class="sched-content"><div class="sched-title">Match 5 + Match 6 <span class="court-pill c1">C1</span><span class="court-pill c2">C2</span></div><div class="sched-sub">A vs D · B vs C</div></div></div>
+      <div class="sched-row"><div class="sched-time">3:16pm</div><div class="sched-content"><div class="sched-title">Standings announced + mixed team draw</div><div class="sched-sub">6 min break</div></div></div>
+    </div>
+    <div class="schedule-block">
+      <h3>🏆 SLC Cup — Knockouts (3:22–3:58pm)</h3>
+      <div class="sched-row"><div class="sched-time">3:22pm</div><div class="sched-content"><div class="sched-title">SF1 + SF2 <span class="court-pill c1">C1</span><span class="court-pill c2">C2</span></div><div class="sched-sub">1st vs 4th · 2nd vs 3rd — simultaneously</div></div></div>
+      <div class="sched-row"><div class="sched-time">3:34pm</div><div class="sched-content"><div class="sched-title">Break + finalists prep</div></div></div>
+      <div class="sched-row"><div class="sched-time">3:46pm</div><div class="sched-content"><div class="sched-title">SLC Cup Final + 3rd place <span class="court-pill c1">C1</span><span class="court-pill c2">C2</span></div><div class="sched-sub">Simultaneously</div></div></div>
+      <div class="sched-row"><div class="sched-time">3:58pm</div><div class="sched-content"><div class="sched-title">🏆 SLC Cup champion crowned!</div></div></div>
+    </div>
+    <div class="schedule-block">
+      <h3>🔀 Mixed Cup (3:58–4:30pm)</h3>
+      <div class="sched-row"><div class="sched-time">3:58pm</div><div class="sched-content"><div class="sched-title">Mixed SF1 + SF2 <span class="court-pill c1">C1</span><span class="court-pill c2">C2</span></div><div class="sched-sub">Simultaneously</div></div></div>
+      <div class="sched-row"><div class="sched-time">4:10pm</div><div class="sched-content"><div class="sched-title">Break + finalists prep</div></div></div>
+      <div class="sched-row"><div class="sched-time">4:18pm</div><div class="sched-content"><div class="sched-title">Mixed Cup Final + 3rd place <span class="court-pill c1">C1</span><span class="court-pill c2">C2</span></div><div class="sched-sub">Simultaneously</div></div></div>
+      <div class="sched-row"><div class="sched-time">4:30pm</div><div class="sched-content"><div class="sched-title">🔀 Mixed Cup champion crowned!</div></div></div>
+    </div>
+    <div class="schedule-block">
+      <h3>🥇 Trophy Presentation + Evening (4:30pm onwards)</h3>
+      <div class="sched-row"><div class="sched-time">4:30pm</div><div class="sched-content"><div class="sched-title">All 4 awards + group photo + closing prayer</div></div></div>
+      <div class="sched-row"><div class="sched-time">5:00pm</div><div class="sched-content"><div class="sched-title">Head home for dinner</div><div class="sched-sub">Families with kids — go home, rest, get kids settled</div></div></div>
+      <div class="sched-row"><div class="sched-time">8:00pm</div><div class="sched-content"><div class="sched-title">Return to church — sleepover begins</div><div class="sched-sub">Sleeping bags, snacks, games, projector setup</div></div></div>
+      <div class="sched-row"><div class="sched-time">9:00pm</div><div class="sched-content"><div class="sched-title">Fellowship sharing + devotion</div></div></div>
+      <div class="sched-row"><div class="sched-time">11:30pm</div><div class="sched-content"><div class="sched-title">Pre-match build-up on Channel 5</div></div></div>
+      <div class="sched-row"><div class="sched-time">3:00am</div><div class="sched-content"><div class="sched-title">📺 FIFA World Cup Final — KICKOFF!</div><div class="sched-sub">Free on Mediacorp Channel 5 · Mon 20 Jul</div></div></div>
+      <div class="sched-row"><div class="sched-time">~5:15am</div><div class="sched-content"><div class="sched-title">Full time + closing prayer + breakfast</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCORES -->
+<div class="page" id="page-scores">
+  <div class="card">
+    <div class="card-label">
+      ⚽ Live match scores
+      <div class="live-indicator" id="live-ind" style="margin-left:auto"><div class="live-dot"></div>Live</div>
+    </div>
+    <div class="section-label">🏆 SLC Cup — Round Robin</div>
+    <div id="scores-rr"></div>
+    <div class="section-label" style="margin-top:16px">🏆 SLC Cup — Knockouts</div>
+    <div id="scores-ko"></div>
+    <div class="section-label" style="margin-top:16px">🔀 Mixed Cup</div>
+    <div id="scores-mixed"></div>
+  </div>
+</div>
+
+<!-- TABLE -->
+<div class="page" id="page-table">
+  <div class="card">
+    <div class="card-label">🏆 SLC Cup — Group standings</div>
+    <table class="standings">
+      <thead><tr><th style="width:38%">Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead>
+      <tbody id="table-body"><tr><td colspan="9" class="empty-state">Waiting for scores...</td></tr></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SLC CUP BRACKET -->
+<div class="page" id="page-slccup">
+  <div class="card">
+    <div class="card-label">🏆 SLC Interfellowship Cup</div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">Semis run simultaneously · 3:22pm</p>
+    <div class="bracket-grid">
+      <div class="bk-match">
+        <div class="bk-header">SF1 · C1 · 1st vs 4th</div>
+        <div class="bk-team" id="sf1t1"><span class="bk-name" id="sf1n1">1st place</span><span class="bk-score" id="sf1s1">–</span></div>
+        <div class="bk-team" id="sf1t2"><span class="bk-name" id="sf1n2">4th place</span><span class="bk-score" id="sf1s2">–</span></div>
+      </div>
+      <div class="bk-match">
+        <div class="bk-header">SF2 · C2 · 2nd vs 3rd</div>
+        <div class="bk-team" id="sf2t1"><span class="bk-name" id="sf2n1">2nd place</span><span class="bk-score" id="sf2s1">–</span></div>
+        <div class="bk-team" id="sf2t2"><span class="bk-name" id="sf2n2">3rd place</span><span class="bk-score" id="sf2s2">–</span></div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Final & 3rd place simultaneously · 3:46pm</p>
+    <div class="bracket-grid">
+      <div class="bk-match">
+        <div class="bk-header">3rd place · C2</div>
+        <div class="bk-team" id="tpt1"><span class="bk-name" id="tpn1">SF1 loser</span><span class="bk-score" id="tps1">–</span></div>
+        <div class="bk-team" id="tpt2"><span class="bk-name" id="tpn2">SF2 loser</span><span class="bk-score" id="tps2">–</span></div>
+      </div>
+      <div class="bk-match final">
+        <div class="bk-header">SLC Cup Final · C1</div>
+        <div class="bk-team" id="fint1"><span class="bk-name" id="finn1">SF1 winner</span><span class="bk-score" id="fins1">–</span></div>
+        <div class="bk-team" id="fint2"><span class="bk-name" id="finn2">SF2 winner</span><span class="bk-score" id="fins2">–</span></div>
+      </div>
+    </div>
+    <div class="champ-banner" id="slc-banner">
+      <span class="icon">🏆</span>
+      <div class="label">SLC Cup Champions</div>
+      <div class="name" id="slc-champ"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MIXED BRACKET -->
+<div class="page" id="page-mixed">
+  <div class="card">
+    <div class="card-label">🔀 SLC Mixed Fellowship Cup</div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">Semis simultaneously · 3:58pm</p>
+    <div class="bracket-grid">
+      <div class="bk-match">
+        <div class="bk-header">Mixed SF1 · C1</div>
+        <div class="bk-team" id="msf1t1"><span class="bk-name" id="msf1n1">Mix 1</span><span class="bk-score" id="msf1s1">–</span></div>
+        <div class="bk-team" id="msf1t2"><span class="bk-name" id="msf1n2">Mix 2</span><span class="bk-score" id="msf1s2">–</span></div>
+      </div>
+      <div class="bk-match">
+        <div class="bk-header">Mixed SF2 · C2</div>
+        <div class="bk-team" id="msf2t1"><span class="bk-name" id="msf2n1">Mix 3</span><span class="bk-score" id="msf2s1">–</span></div>
+        <div class="bk-team" id="msf2t2"><span class="bk-name" id="msf2n2">Mix 4</span><span class="bk-score" id="msf2s2">–</span></div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Final & 3rd place simultaneously · 4:18pm</p>
+    <div class="bracket-grid">
+      <div class="bk-match">
+        <div class="bk-header">3rd place · C2</div>
+        <div class="bk-team" id="mtp1"><span class="bk-name" id="mtpn1">SF1 loser</span><span class="bk-score" id="mtps1">–</span></div>
+        <div class="bk-team" id="mtp2"><span class="bk-name" id="mtpn2">SF2 loser</span><span class="bk-score" id="mtps2">–</span></div>
+      </div>
+      <div class="bk-match mixed-final">
+        <div class="bk-header">Mixed Cup Final · C1</div>
+        <div class="bk-team" id="mfin1"><span class="bk-name" id="mfinn1">SF1 winner</span><span class="bk-score" id="mfins1">–</span></div>
+        <div class="bk-team" id="mfin2"><span class="bk-name" id="mfinn2">SF2 winner</span><span class="bk-score" id="mfins2">–</span></div>
+      </div>
+    </div>
+    <div class="champ-banner purple" id="mixed-banner">
+      <span class="icon">🔀</span>
+      <div class="label">Mixed Cup Champions</div>
+      <div class="name" id="mixed-champ"></div>
+    </div>
+  </div>
+</div>
+
+<!-- GOLDEN BOOT -->
+<div class="page" id="page-boot">
+  <div class="champ-banner" id="boot-banner" style="margin-bottom:12px;">
+    <span class="icon">👟</span>
+    <div class="label">Golden Boot Leader</div>
+    <div class="name" id="boot-leader-name"></div>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px;" id="boot-leader-goals"></div>
+  </div>
+  <div class="card">
+    <div class="card-label">👟 Top scorers</div>
+    <div id="boot-list"><div class="empty-state">No scorers yet</div></div>
+  </div>
+</div>
+
+<!-- RULES -->
+<div class="page" id="page-rules">
+  <div class="card">
+    <div class="card-label">📋 Rules & regulations</div>
+    <div class="rule-section">
+      <h3>⚽ General rules</h3>
+      <div class="rule-row"><span class="rule-icon">👕</span><div class="rule-text"><strong>5-a-side</strong> — 5 players on pitch per team. Rolling subs, unlimited.</div></div>
+      <div class="rule-row"><span class="rule-icon">⏱</span><div class="rule-text"><strong>12-minute games</strong> — straight time, no stoppage time. Referee's whistle is final.</div></div>
+      <div class="rule-row"><span class="rule-icon">👧</span><div class="rule-text"><strong>Mixed gender</strong> — at least 2 female players on pitch at all times.</div></div>
+      <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text"><strong>No sliding tackles</strong> — safety first. Sliding = free kick.</div></div>
+      <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text"><strong>No heading</strong> — reduces collision risk on small courts.</div></div>
+      <div class="rule-row"><span class="rule-icon">🦶</span><div class="rule-text"><strong>Kick-ins</strong> instead of throw-ins. Ball stationary, taken within 5 seconds.</div></div>
+      <div class="rule-row"><span class="rule-icon">5️⃣</span><div class="rule-text"><strong>5-second rule</strong> on all restarts — kick-ins, corners, goal kicks, keeper distribution.</div></div>
+      <div class="rule-row"><span class="rule-icon">🧤</span><div class="rule-text"><strong>Goalkeeper</strong> — no punting. Rolling or throwing only. Cannot be scored on directly from a kick-in.</div></div>
+      <div class="rule-row"><span class="rule-icon">🟨</span><div class="rule-text"><strong>Yellow card</strong> — 2-minute sin bin, team plays short.</div></div>
+      <div class="rule-row"><span class="rule-icon">🟥</span><div class="rule-text"><strong>Red card</strong> — player out for the rest of the tournament. No replacement.</div></div>
+      <div class="rule-row"><span class="rule-icon">✝️</span><div class="rule-text"><strong>Spirit of the game</strong> — we play to honour God. Respect opponents, referees and teammates. Arguing with the referee = yellow card.</div></div>
+    </div>
+    <div class="rule-section">
+      <h3>📊 Points system</h3>
+      <div class="rule-row"><span class="rule-icon">✅</span><div class="rule-text"><strong>Win</strong> = 3 points</div></div>
+      <div class="rule-row"><span class="rule-icon">🤝</span><div class="rule-text"><strong>Draw</strong> = 1 point each</div></div>
+      <div class="rule-row"><span class="rule-icon">❌</span><div class="rule-text"><strong>Loss</strong> = 0 points</div></div>
+      <div class="rule-row"><span class="rule-icon">📊</span><div class="rule-text"><strong>Tiebreaker:</strong> Goal difference → Goals scored → Head-to-head → Penalty shootout</div></div>
+    </div>
+    <div class="rule-section">
+      <h3>⚡ Knockout rules</h3>
+      <div class="rule-row"><span class="rule-icon">🎯</span><div class="rule-text"><strong>If level after 12 mins</strong> — straight to penalties. No extra time.</div></div>
+      <div class="rule-row"><span class="rule-icon">🎯</span><div class="rule-text"><strong>Shootout</strong> — 3 kicks each, alternating. Sudden death if still level.</div></div>
+    </div>
+    <div class="rule-section">
+      <h3>🔀 Mixed Cup draw</h3>
+      <div class="rule-row"><span class="rule-icon">🎲</span><div class="rule-text">Players randomly drawn into 4 new teams after the SLC Cup group stage.</div></div>
+      <div class="rule-row"><span class="rule-icon">🧩</span><div class="rule-text">Each mixed team must have players from <strong>at least 2 different fellowships</strong>.</div></div>
+      <div class="rule-row"><span class="rule-icon">⚖️</span><div class="rule-text">Draw master ensures gender balance across all 4 teams.</div></div>
+    </div>
+    <div class="rule-section">
+      <h3>🏅 Awards</h3>
+      <div class="rule-row"><span class="rule-icon">🏆</span><div class="rule-text"><strong>SLC Cup</strong> — winners of the interfellowship knockout final.</div></div>
+      <div class="rule-row"><span class="rule-icon">🔀</span><div class="rule-text"><strong>Mixed Cup</strong> — winners of the mixed fellowship knockout final.</div></div>
+      <div class="rule-row"><span class="rule-icon">👟</span><div class="rule-text"><strong>Golden Boot</strong> — top scorer across both tournaments.</div></div>
+      <div class="rule-row"><span class="rule-icon">✝️</span><div class="rule-text"><strong>Servant Heart Award</strong> — voted by all players. Most Christlike player of the day.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="page" id="page-admin">
+  <div id="admin-lock">
+    <div class="card">
+      <div class="card-label">🔒 Admin access</div>
+      <div class="admin-lock">
+        <p>Enter the admin PIN to update scores and manage the tournament.</p>
+        <input type="password" class="pin-input" id="pin-input" placeholder="••••" maxlength="4">
+        <br><br>
+        <button class="btn btn-gold" onclick="checkPin()">Unlock</button>
+      </div>
+    </div>
+  </div>
+  <div id="admin-panel" style="display:none">
+    <div class="card">
+      <div class="card-label">⚙️ Team names</div>
+      <div class="admin-grid" style="margin-bottom:8px">
+        <div class="admin-field"><label>Team A</label><input type="text" id="admin-nameA" placeholder="Fellowship A" oninput="saveTeamNames()"></div>
+        <div class="admin-field"><label>Team B</label><input type="text" id="admin-nameB" placeholder="Fellowship B" oninput="saveTeamNames()"></div>
+        <div class="admin-field"><label>Team C</label><input type="text" id="admin-nameC" placeholder="Fellowship C" oninput="saveTeamNames()"></div>
+        <div class="admin-field"><label>Team D</label><input type="text" id="admin-nameD" placeholder="Fellowship D" oninput="saveTeamNames()"></div>
+      </div>
+      <div class="admin-grid">
+        <div class="admin-field"><label>Mix 1</label><input type="text" id="admin-nameM1" placeholder="Mix 1" oninput="saveTeamNames()"></div>
+        <div class="admin-field"><label>Mix 2</label><input type="text" id="admin-nameM2" placeholder="Mix 2" oninput="saveTeamNames()"></div>
+        <div class="admin-field"><label>Mix 3</label><input type="text" id="admin-nameM3" placeholder="Mix 3" oninput="saveTeamNames()"></div>
+        <div class="admin-field"><label>Mix 4</label><input type="text" id="admin-nameM4" placeholder="Mix 4" oninput="saveTeamNames()"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">⚽ Update scores</div>
+      <div class="section-divider">SLC Cup — Round Robin</div>
+      <div id="admin-rr"></div>
+      <div class="section-divider" style="margin-top:12px">SLC Cup — Knockouts</div>
+      <div id="admin-ko"></div>
+      <div class="section-divider" style="margin-top:12px">🔀 Mixed Cup</div>
+      <div id="admin-mixed"></div>
+    </div>
+    <div class="card">
+      <div class="card-label">👟 Golden Boot — manage scorers</div>
+      <div class="gb-add-row" style="display:flex;gap:8px;margin-bottom:12px">
+        <select id="admin-gb-team" style="flex:0 0 100px;padding:8px 6px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:12px;background:var(--surface2);color:var(--text);outline:none;"></select>
+        <input type="text" id="admin-gb-name" placeholder="Player name" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--surface2);color:var(--text);outline:none;">
+        <button class="btn btn-gold" onclick="addScorer()">Add</button>
+      </div>
+      <div id="admin-boot-list"><div class="empty-state">No scorers added yet</div></div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+const SUPABASE_URL = 'https://dmflbktsmphrmvylofft.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_OxQfEn13rTG0SO_p3WK6Cw_vg9Z5Z77';
+const ADMIN_PIN = '2026';
+
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const RR_MATCHES = [
+  {id:'rr1',label:'M1',h:'A',a:'B',time:'2:40pm',court:'C1'},
+  {id:'rr2',label:'M2',h:'C',a:'D',time:'2:40pm',court:'C2'},
+  {id:'rr3',label:'M3',h:'A',a:'C',time:'2:52pm',court:'C1'},
+  {id:'rr4',label:'M4',h:'B',a:'D',time:'2:52pm',court:'C2'},
+  {id:'rr5',label:'M5',h:'A',a:'D',time:'3:04pm',court:'C1'},
+  {id:'rr6',label:'M6',h:'B',a:'C',time:'3:04pm',court:'C2'},
+];
+const KO_MATCHES = [
+  {id:'sf1',label:'SF1',name:'1st vs 4th',time:'3:22pm',court:'C1'},
+  {id:'sf2',label:'SF2',name:'2nd vs 3rd',time:'3:22pm',court:'C2'},
+  {id:'tp',label:'3rd place',name:'SF1 loser vs SF2 loser',time:'3:46pm',court:'C2'},
+  {id:'final',label:'SLC Cup Final',name:'SF1 winner vs SF2 winner',time:'3:46pm',court:'C1'},
+];
+const MX_MATCHES = [
+  {id:'msf1',label:'Mixed SF1',time:'3:58pm',court:'C1'},
+  {id:'msf2',label:'Mixed SF2',time:'3:58pm',court:'C2'},
+  {id:'mtp',label:'Mixed 3rd place',time:'4:18pm',court:'C2'},
+  {id:'mfinal',label:'Mixed Cup Final',time:'4:18pm',court:'C1'},
+];
+
+let state = {
+  teams:{A:'Team A',B:'Team B',C:'Team C',D:'Team D',M1:'Mix 1',M2:'Mix 2',M3:'Mix 3',M4:'Mix 4'},
+  scores:{},
+  scorers:[]
+};
+
+window.showPage = function(id, btn) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  btn.classList.add('active');
+  renderAll();
+};
+
+window.checkPin = function() {
+  const pin = document.getElementById('pin-input').value;
+  if(pin === ADMIN_PIN) {
+    document.getElementById('admin-lock').style.display='none';
+    document.getElementById('admin-panel').style.display='block';
+    renderAdminScores();
+    renderAdminBoot();
+    loadTeamNamesToAdmin();
+  } else {
+    showToast('Wrong PIN','red');
+  }
+};
+
+function tn(t){ return state.teams[t] || t; }
+
+function showToast(msg, color='green') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = color==='red' ? 'var(--red)' : 'var(--green)';
+  t.style.color = color==='red' ? '#fff' : '#000';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+async function loadData() {
+  const [scoresRes, scorersRes, teamsRes] = await Promise.all([
+    sb.from('scores').select('*'),
+    sb.from('scorers').select('*').order('goals',{ascending:false}),
+    sb.from('settings').select('*').eq('key','teams').single()
+  ]);
+  if(scoresRes.data) {
+    state.scores = {};
+    scoresRes.data.forEach(r => state.scores[r.match_id] = {home:r.home_score, away:r.away_score});
+  }
+  if(scorersRes.data) state.scorers = scorersRes.data;
+  if(teamsRes.data?.value) state.teams = {...state.teams, ...JSON.parse(teamsRes.data.value)};
+  renderAll();
+  loadTeamNamesToAdmin();
+}
+
+async function saveScore(matchId, home, away) {
+  await sb.from('scores').upsert({match_id:matchId, home_score:home, away_score:away},{onConflict:'match_id'});
+  state.scores[matchId] = {home, away};
+  renderAll();
+  showToast('Score saved ✓');
+}
+
+window.saveTeamNames = function() {
+  const names = {
+    A: document.getElementById('admin-nameA').value || 'Team A',
+    B: document.getElementById('admin-nameB').value || 'Team B',
+    C: document.getElementById('admin-nameC').value || 'Team C',
+    D: document.getElementById('admin-nameD').value || 'Team D',
+    M1: document.getElementById('admin-nameM1').value || 'Mix 1',
+    M2: document.getElementById('admin-nameM2').value || 'Mix 2',
+    M3: document.getElementById('admin-nameM3').value || 'Mix 3',
+    M4: document.getElementById('admin-nameM4').value || 'Mix 4',
+  };
+  state.teams = names;
+  sb.from('settings').upsert({key:'teams',value:JSON.stringify(names)},{onConflict:'key'});
+  renderAll();
+  renderAdminBoot();
+};
+
+function loadTeamNamesToAdmin() {
+  ['A','B','C','D'].forEach(t => {
+    const el = document.getElementById('admin-name'+t);
+    if(el) el.value = state.teams[t] || '';
+  });
+  ['1','2','3','4'].forEach(t => {
+    const el = document.getElementById('admin-nameM'+t);
+    if(el) el.value = state.teams['M'+t] || '';
+  });
+}
+
+function sc(id) { return state.scores[id] || null; }
+function scStr(id, side) {
+  const s = sc(id);
+  return s ? (side==='h' ? s.home : s.away) : null;
+}
+
+function calcStats() {
+  const stats = {};
+  ['A','B','C','D'].forEach(t => stats[t]={P:0,W:0,D:0,L:0,GF:0,GA:0,GD:0,Pts:0});
+  RR_MATCHES.forEach(m => {
+    const s = sc(m.id);
+    if(!s) return;
+    const gh=s.home, ga=s.away;
+    stats[m.h].P++; stats[m.a].P++;
+    stats[m.h].GF+=gh; stats[m.h].GA+=ga;
+    stats[m.a].GF+=ga; stats[m.a].GA+=gh;
+    if(gh>ga){stats[m.h].W++;stats[m.h].Pts+=3;stats[m.a].L++;}
+    else if(gh<ga){stats[m.a].W++;stats[m.a].Pts+=3;stats[m.h].L++;}
+    else{stats[m.h].D++;stats[m.h].Pts++;stats[m.a].D++;stats[m.a].Pts++;}
+  });
+  ['A','B','C','D'].forEach(t => stats[t].GD=stats[t].GF-stats[t].GA);
+  return stats;
+}
+
+function sortedTeams(stats) {
+  return ['A','B','C','D'].sort((a,b)=>{
+    if(stats[b].Pts!==stats[a].Pts) return stats[b].Pts-stats[a].Pts;
+    if(stats[b].GD!==stats[a].GD) return stats[b].GD-stats[a].GD;
+    if(stats[b].GF!==stats[a].GF) return stats[b].GF-stats[a].GF;
+    return a.localeCompare(b);
+  });
+}
+
+function renderAll() {
+  renderScores();
+  renderTable();
+  renderSLCBracket();
+  renderMixedBracket();
+  renderBoot();
+}
+
+function renderScores() {
+  const rrEl = document.getElementById('scores-rr');
+  const koEl = document.getElementById('scores-ko');
+  const mxEl = document.getElementById('scores-mixed');
+  if(!rrEl) return;
+
+  rrEl.innerHTML = RR_MATCHES.map(m => {
+    const s = sc(m.id);
+    return `<div class="match-card">
+      <div class="match-header">
+        <span class="match-badge">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span> · ${m.time}</span>
+      </div>
+      <div class="match-teams">
+        <span class="match-team">${tn(m.h)}</span>
+        <div class="match-score">
+          ${s ? `<span class="score-num">${s.home}</span><span class="score-sep">–</span><span class="score-num">${s.away}</span>` : `<span class="score-tbd">vs</span>`}
+        </div>
+        <span class="match-team">${tn(m.a)}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  const stats = calcStats();
+  const ord = sortedTeams(stats);
+  const koNames = {
+    sf1:{h:tn(ord[0]),a:tn(ord[3])},
+    sf2:{h:tn(ord[1]),a:tn(ord[2])},
+  };
+  const sf1 = sc('sf1'), sf2 = sc('sf2');
+  const sf1w = sf1&&sf1.home!==sf1.away ? (sf1.home>sf1.away?koNames.sf1.h:koNames.sf1.a) : null;
+  const sf1l = sf1&&sf1.home!==sf1.away ? (sf1.home>sf1.away?koNames.sf1.a:koNames.sf1.h) : null;
+  const sf2w = sf2&&sf2.home!==sf2.away ? (sf2.home>sf2.away?koNames.sf2.h:koNames.sf2.a) : null;
+  const sf2l = sf2&&sf2.home!==sf2.away ? (sf2.home>sf2.away?koNames.sf2.a:koNames.sf2.h) : null;
+  const koLabels = {
+    sf1:{h:koNames.sf1.h,a:koNames.sf1.a},
+    sf2:{h:koNames.sf2.h,a:koNames.sf2.a},
+    tp:{h:sf1l||'SF1 loser',a:sf2l||'SF2 loser'},
+    final:{h:sf1w||'SF1 winner',a:sf2w||'SF2 winner'},
+  };
+  koEl.innerHTML = KO_MATCHES.map(m => {
+    const s = sc(m.id);
+    const names = koLabels[m.id]||{h:'TBD',a:'TBD'};
+    return `<div class="match-card">
+      <div class="match-header"><span class="match-badge">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span> · ${m.time}</span></div>
+      <div class="match-teams">
+        <span class="match-team">${names.h}</span>
+        <div class="match-score">${s?`<span class="score-num">${s.home}</span><span class="score-sep">–</span><span class="score-num">${s.away}</span>`:`<span class="score-tbd">vs</span>`}</div>
+        <span class="match-team">${names.a}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  const mxLabels = {
+    msf1:{h:tn('M1'),a:tn('M2')},
+    msf2:{h:tn('M3'),a:tn('M4')},
+  };
+  const msf1 = sc('msf1'), msf2 = sc('msf2');
+  const msf1w = msf1&&msf1.home!==msf1.away?(msf1.home>msf1.away?tn('M1'):tn('M2')):null;
+  const msf1l = msf1&&msf1.home!==msf1.away?(msf1.home>msf1.away?tn('M2'):tn('M1')):null;
+  const msf2w = msf2&&msf2.home!==msf2.away?(msf2.home>msf2.away?tn('M3'):tn('M4')):null;
+  const msf2l = msf2&&msf2.home!==msf2.away?(msf2.home>msf2.away?tn('M4'):tn('M3')):null;
+  mxLabels.mtp = {h:msf1l||'SF1 loser',a:msf2l||'SF2 loser'};
+  mxLabels.mfinal = {h:msf1w||'SF1 winner',a:msf2w||'SF2 winner'};
+  mxEl.innerHTML = MX_MATCHES.map(m => {
+    const s = sc(m.id);
+    const names = mxLabels[m.id]||{h:'TBD',a:'TBD'};
+    return `<div class="match-card">
+      <div class="match-header"><span class="match-badge">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span> · ${m.time}</span></div>
+      <div class="match-teams">
+        <span class="match-team">${names.h}</span>
+        <div class="match-score">${s?`<span class="score-num">${s.home}</span><span class="score-sep">–</span><span class="score-num">${s.away}</span>`:`<span class="score-tbd">vs</span>`}</div>
+        <span class="match-team">${names.a}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderTable() {
+  const tbody = document.getElementById('table-body');
+  if(!tbody) return;
+  const stats = calcStats();
+  const ord = sortedTeams(stats);
+  const hasAny = ['A','B','C','D'].some(t=>stats[t].P>0);
+  if(!hasAny){tbody.innerHTML='<tr><td colspan="9" class="empty-state">Waiting for scores...</td></tr>';return;}
+  const pc=['pos-1','pos-2','pos-3','pos-4'];
+  tbody.innerHTML = ord.map((t,i)=>{
+    const r=stats[t];
+    const gdStr=r.P===0?'–':(r.GD>0?'+'+r.GD:String(r.GD));
+    const gdCls=r.GD>0?'gd-pos':r.GD<0?'gd-neg':'gd-zero';
+    return `<tr><td><span class="pos ${pc[i]}">${i+1}</span>${tn(t)}</td><td>${r.P}</td><td>${r.W}</td><td>${r.D}</td><td>${r.L}</td><td>${r.GF}</td><td>${r.GA}</td><td class="${gdCls}">${gdStr}</td><td class="pts">${r.Pts}</td></tr>`;
+  }).join('');
+}
+
+function setEl(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+function setW(id1,id2,f){
+  const e1=document.getElementById(id1),e2=document.getElementById(id2);
+  if(e1){e1.classList.toggle('winner',f);}
+  if(e2){e2.classList.toggle('winner',!f);}
+}
+function clrW(id1,id2){
+  [id1,id2].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('winner');});
+}
+
+function renderSLCBracket() {
+  const stats = calcStats();
+  const ord = sortedTeams(stats);
+  const p = [tn(ord[0]),tn(ord[1]),tn(ord[2]),tn(ord[3])];
+  setEl('sf1n1',p[0]); setEl('sf1n2',p[3]);
+  setEl('sf2n1',p[1]); setEl('sf2n2',p[2]);
+
+  const sf1=sc('sf1'),sf2=sc('sf2');
+  let sf1w=null,sf1l=null,sf2w=null,sf2l=null;
+
+  if(sf1){setEl('sf1s1',sf1.home);setEl('sf1s2',sf1.away);}
+  if(sf2){setEl('sf2s1',sf2.home);setEl('sf2s2',sf2.away);}
+
+  if(sf1&&sf1.home!==sf1.away){sf1w=sf1.home>sf1.away?p[0]:p[3];sf1l=sf1.home>sf1.away?p[3]:p[0];setW('sf1t1','sf1t2',sf1.home>sf1.away);}else{clrW('sf1t1','sf1t2');}
+  if(sf2&&sf2.home!==sf2.away){sf2w=sf2.home>sf2.away?p[1]:p[2];sf2l=sf2.home>sf2.away?p[2]:p[1];setW('sf2t1','sf2t2',sf2.home>sf2.away);}else{clrW('sf2t1','sf2t2');}
+
+  setEl('tpn1',sf1l||'SF1 loser'); setEl('tpn2',sf2l||'SF2 loser');
+  setEl('finn1',sf1w||'SF1 winner'); setEl('finn2',sf2w||'SF2 winner');
+
+  const tp=sc('tp'),fin=sc('final');
+  if(tp){setEl('tps1',tp.home);setEl('tps2',tp.away);if(tp.home!==tp.away)setW('tpt1','tpt2',tp.home>tp.away);else clrW('tpt1','tpt2');}
+  if(fin){setEl('fins1',fin.home);setEl('fins2',fin.away);
+    if(fin.home!==fin.away){setW('fint1','fint2',fin.home>fin.away);const champ=fin.home>fin.away?sf1w:sf2w;if(champ){const b=document.getElementById('slc-banner');b.style.display='block';setEl('slc-champ',champ);}}
+    else clrW('fint1','fint2');
+  }
+}
+
+function renderMixedBracket() {
+  const mn = [tn('M1'),tn('M2'),tn('M3'),tn('M4')];
+  setEl('msf1n1',mn[0]);setEl('msf1n2',mn[1]);
+  setEl('msf2n1',mn[2]);setEl('msf2n2',mn[3]);
+
+  const msf1=sc('msf1'),msf2=sc('msf2');
+  let msf1w=null,msf1l=null,msf2w=null,msf2l=null;
+
+  if(msf1){setEl('msf1s1',msf1.home);setEl('msf1s2',msf1.away);}
+  if(msf2){setEl('msf2s1',msf2.home);setEl('msf2s2',msf2.away);}
+
+  if(msf1&&msf1.home!==msf1.away){msf1w=msf1.home>msf1.away?mn[0]:mn[1];msf1l=msf1.home>msf1.away?mn[1]:mn[0];setW('msf1t1','msf1t2',msf1.home>msf1.away);}else clrW('msf1t1','msf1t2');
+  if(msf2&&msf2.home!==msf2.away){msf2w=msf2.home>msf2.away?mn[2]:mn[3];msf2l=msf2.home>msf2.away?mn[3]:mn[2];setW('msf2t1','msf2t2',msf2.home>msf2.away);}else clrW('msf2t1','msf2t2');
+
+  setEl('mtpn1',msf1l||'SF1 loser');setEl('mtpn2',msf2l||'SF2 loser');
+  setEl('mfinn1',msf1w||'SF1 winner');setEl('mfinn2',msf2w||'SF2 winner');
+
+  const mtp=sc('mtp'),mfin=sc('mfinal');
+  if(mtp){setEl('mtps1',mtp.home);setEl('mtps2',mtp.away);if(mtp.home!==mtp.away)setW('mtp1','mtp2',mtp.home>mtp.away);else clrW('mtp1','mtp2');}
+  if(mfin){setEl('mfins1',mfin.home);setEl('mfins2',mfin.away);
+    if(mfin.home!==mfin.away){setW('mfin1','mfin2',mfin.home>mfin.away);const champ=mfin.home>mfin.away?msf1w:msf2w;if(champ){const b=document.getElementById('mixed-banner');b.style.display='block';setEl('mixed-champ',champ);}}
+    else clrW('mfin1','mfin2');
+  }
+}
+
+function renderBoot() {
+  const list = document.getElementById('boot-list');
+  const banner = document.getElementById('boot-banner');
+  if(!list) return;
+  const sorted = [...state.scorers].sort((a,b)=>b.goals-a.goals||a.name.localeCompare(b.name));
+  if(sorted.length===0){list.innerHTML='<div class="empty-state">No scorers yet</div>';if(banner)banner.style.display='none';return;}
+  const top=sorted[0];
+  if(top.goals>0&&banner){
+    banner.style.display='block';
+    setEl('boot-leader-name',top.name+' · '+tn(top.team));
+    setEl('boot-leader-goals',top.goals+(top.goals===1?' goal':' goals'));
+  }
+  let rank=0,prev=-1;
+  list.innerHTML=sorted.map((p,i)=>{
+    if(p.goals!==prev){rank=i+1;prev=p.goals;}
+    const isTop=rank===1&&p.goals>0;
+    return `<div class="gb-row${isTop?' leader':''}">
+      <div class="gb-rank">${isTop?'👟':rank}</div>
+      <div class="gb-info"><div class="gb-name">${p.name}</div><div class="gb-team">${tn(p.team)}</div></div>
+      <div class="gb-goals">${p.goals}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderAdminScores() {
+  const stats = calcStats();
+  const ord = sortedTeams(stats);
+  const rrEl = document.getElementById('admin-rr');
+  const koEl = document.getElementById('admin-ko');
+  const mxEl = document.getElementById('admin-mixed');
+  if(!rrEl) return;
+
+  rrEl.innerHTML = RR_MATCHES.map(m => {
+    const s = sc(m.id);
+    return `<div class="match-admin">
+      <div class="match-admin-header">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span> · ${m.time}</div>
+      <div class="match-admin-teams">
+        <span class="match-admin-team">${tn(m.h)}</span>
+        <div class="score-inputs">
+          <input type="number" min="0" id="as_${m.id}_h" value="${s?s.home:''}" placeholder="0">
+          <span>–</span>
+          <input type="number" min="0" id="as_${m.id}_a" value="${s?s.away:''}" placeholder="0">
+        </div>
+        <span class="match-admin-team">${tn(m.a)}</span>
+        <button class="save-btn" onclick="saveMatchScore('${m.id}')">Save</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  const koLabels = {
+    sf1:{h:tn(ord[0]),a:tn(ord[3])},
+    sf2:{h:tn(ord[1]),a:tn(ord[2])},
+  };
+  const sf1=sc('sf1'),sf2=sc('sf2');
+  const sf1w=sf1&&sf1.home!==sf1.away?(sf1.home>sf1.away?tn(ord[0]):tn(ord[3])):null;
+  const sf1l=sf1&&sf1.home!==sf1.away?(sf1.home>sf1.away?tn(ord[3]):tn(ord[0])):null;
+  const sf2w=sf2&&sf2.home!==sf2.away?(sf2.home>sf2.away?tn(ord[1]):tn(ord[2])):null;
+  const sf2l=sf2&&sf2.home!==sf2.away?(sf2.home>sf2.away?tn(ord[2]):tn(ord[1])):null;
+  koLabels.tp={h:sf1l||'SF1 loser',a:sf2l||'SF2 loser'};
+  koLabels.final={h:sf1w||'SF1 winner',a:sf2w||'SF2 winner'};
+
+  koEl.innerHTML = KO_MATCHES.map(m => {
+    const s=sc(m.id);
+    const names=koLabels[m.id]||{h:'TBD',a:'TBD'};
+    return `<div class="match-admin">
+      <div class="match-admin-header">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span></div>
+      <div class="match-admin-teams">
+        <span class="match-admin-team">${names.h}</span>
+        <div class="score-inputs"><input type="number" min="0" id="as_${m.id}_h" value="${s?s.home:''}" placeholder="0"><span>–</span><input type="number" min="0" id="as_${m.id}_a" value="${s?s.away:''}" placeholder="0"></div>
+        <span class="match-admin-team">${names.a}</span>
+        <button class="save-btn" onclick="saveMatchScore('${m.id}')">Save</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  const msf1=sc('msf1'),msf2=sc('msf2');
+  const mxLabels={
+    msf1:{h:tn('M1'),a:tn('M2')},
+    msf2:{h:tn('M3'),a:tn('M4')},
+    mtp:{h:msf1&&msf1.home!==msf1.away?(msf1.home>msf1.away?tn('M2'):tn('M1')):'SF1 loser',a:msf2&&msf2.home!==msf2.away?(msf2.home>msf2.away?tn('M4'):tn('M3')):'SF2 loser'},
+    mfinal:{h:msf1&&msf1.home!==msf1.away?(msf1.home>msf1.away?tn('M1'):tn('M2')):'SF1 winner',a:msf2&&msf2.home!==msf2.away?(msf2.home>msf2.away?tn('M3'):tn('M4')):'SF2 winner'},
+  };
+  mxEl.innerHTML = MX_MATCHES.map(m => {
+    const s=sc(m.id);
+    const names=mxLabels[m.id]||{h:'TBD',a:'TBD'};
+    return `<div class="match-admin">
+      <div class="match-admin-header">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span></div>
+      <div class="match-admin-teams">
+        <span class="match-admin-team">${names.h}</span>
+        <div class="score-inputs"><input type="number" min="0" id="as_${m.id}_h" value="${s?s.home:''}" placeholder="0"><span>–</span><input type="number" min="0" id="as_${m.id}_a" value="${s?s.away:''}" placeholder="0"></div>
+        <span class="match-admin-team">${names.a}</span>
+        <button class="save-btn" onclick="saveMatchScore('${m.id}')">Save</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderAdminBoot() {
+  const sel = document.getElementById('admin-gb-team');
+  if(sel) {
+    sel.innerHTML = ['A','B','C','D'].map(t=>`<option value="${t}">${tn(t)}</option>`).join('');
+  }
+  const list = document.getElementById('admin-boot-list');
+  if(!list) return;
+  const sorted = [...state.scorers].sort((a,b)=>b.goals-a.goals||a.name.localeCompare(b.name));
+  if(sorted.length===0){list.innerHTML='<div class="empty-state">No scorers added yet</div>';return;}
+  list.innerHTML = sorted.map(p=>`
+    <div class="match-admin" style="margin-bottom:6px">
+      <div class="match-admin-teams">
+        <span class="match-admin-team" style="text-align:left;flex:1">${p.name} <span style="color:var(--muted);font-size:11px">${tn(p.team)}</span></span>
+        <div class="score-inputs">
+          <button class="save-btn" style="background:var(--surface2);color:var(--text);border:1px solid var(--border)" onclick="updateGoals('${p.id}',-1)">−</button>
+          <input type="number" min="0" id="goals_${p.id}" value="${p.goals}" style="width:44px">
+          <button class="save-btn" onclick="updateGoals('${p.id}',1)">+</button>
+        </div>
+        <button class="save-btn" onclick="saveGoals('${p.id}')">Save</button>
+        <button class="save-btn" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red);margin-left:4px" onclick="deleteScorer('${p.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+window.saveMatchScore = async function(matchId) {
+  const h = parseInt(document.getElementById('as_'+matchId+'_h').value);
+  const a = parseInt(document.getElementById('as_'+matchId+'_a').value);
+  if(isNaN(h)||isNaN(a)){showToast('Enter both scores','red');return;}
+  await saveScore(matchId, h, a);
+  renderAdminScores();
+};
+
+window.addScorer = async function() {
+  const name = document.getElementById('admin-gb-name').value.trim();
+  const team = document.getElementById('admin-gb-team').value;
+  if(!name){showToast('Enter player name','red');return;}
+  const {data} = await sb.from('scorers').insert({name,team,goals:0}).select().single();
+  if(data){state.scorers.push(data);document.getElementById('admin-gb-name').value='';}
+  renderBoot();renderAdminBoot();showToast('Player added ✓');
+};
+
+window.updateGoals = function(id, delta) {
+  const input = document.getElementById('goals_'+id);
+  if(!input) return;
+  input.value = Math.max(0, parseInt(input.value||0) + delta);
+};
+
+window.saveGoals = async function(id) {
+  const val = parseInt(document.getElementById('goals_'+id).value);
+  if(isNaN(val)) return;
+  await sb.from('scorers').update({goals:val}).eq('id',id);
+  const p = state.scorers.find(x=>x.id===id);
+  if(p) p.goals = val;
+  renderBoot();renderAdminBoot();showToast('Goals saved ✓');
+};
+
+window.deleteScorer = async function(id) {
+  await sb.from('scorers').delete().eq('id',id);
+  state.scorers = state.scorers.filter(x=>x.id!==id);
+  renderBoot();renderAdminBoot();showToast('Removed');
+};
+
+// Realtime subscription
+sb.channel('scores').on('postgres_changes',{event:'*',schema:'public',table:'scores'},()=>loadData()).subscribe();
+sb.channel('scorers').on('postgres_changes',{event:'*',schema:'public',table:'scorers'},()=>loadData()).subscribe();
+
+loadData();
+</script>
+</body>
+</html>
