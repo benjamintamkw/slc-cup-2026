@@ -172,6 +172,7 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
       <button class="nav-tab" data-page="slccup">🏆 SLC Cup</button>
       <button class="nav-tab" data-page="mixed">🔀 Mixed</button>
       <button class="nav-tab" data-page="boot">👟 Boot</button>
+      <button class="nav-tab" data-page="players">👥 Players</button>
       <button class="nav-tab" data-page="rules">Rules</button>
       <button class="nav-tab" data-page="admin">Admin</button>
     </div>
@@ -389,6 +390,14 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
   </div>
 </div>
 
+<!-- PLAYERS -->
+<div class="page" id="page-players">
+  <div class="card">
+    <div class="card-label">👥 Player list by team</div>
+    <div id="players-public-list"><div class="empty-state">No players added yet</div></div>
+  </div>
+</div>
+
 <!-- RULES -->
 <div class="page" id="page-rules">
   <div class="card">
@@ -432,7 +441,6 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
       <div class="rule-row"><span class="rule-icon">🏆</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw1"><strong>SLC Cup Champions</strong> — Grab vouchers for the winning team.</div></div>
       <div class="rule-row"><span class="rule-icon">🔀</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw2"><strong>Mixed Cup Champions</strong> — Grab vouchers for the winning team.</div></div>
       <div class="rule-row"><span class="rule-icon">👟</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw3"><strong>Golden Boot</strong> — top scorer across both tournaments, Grab voucher.</div></div>
-      <div class="rule-row"><span class="rule-icon">✝️</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw4"><strong>Servant Heart Award</strong> — voted by all players. Most Christlike player of the day. Book + handwritten note.</div></div>
     </div>
   </div>
 </div>
@@ -495,6 +503,16 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
       </div>
       <div id="admin-boot-list"><div class="empty-state">No scorers added yet</div></div>
     </div>
+    <div class="card">
+      <div class="card-label">👥 Player list — manage roster</div>
+      <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Add players and assign them to a team. Change their team anytime for transfers.</p>
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <select id="admin-player-team" style="flex:0 0 100px;padding:8px 6px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:12px;background:var(--surface2);color:var(--text);outline:none;"></select>
+        <input type="text" id="admin-player-name" placeholder="Player name" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--surface2);color:var(--text);outline:none;">
+        <button class="btn btn-gold" onclick="addPlayer()">Add</button>
+      </div>
+      <div id="admin-players-list"><div class="empty-state">No players added yet</div></div>
+    </div>
   </div>
 </div>
 
@@ -539,6 +557,7 @@ let state = {
   teams:{A:'Team A',B:'Team B',C:'Team C',D:'Team D',E:'Team E',M1:'Mix 1',M2:'Mix 2',M3:'Mix 3',M4:'Mix 4'},
   scores:{},
   scorers:[],
+  players:[],
   content:{}
 };
 
@@ -569,6 +588,7 @@ function unlockAdmin() {
   document.getElementById('admin-panel').style.display='block';
   renderAdminScores();
   renderAdminBoot();
+  renderAdminPlayers();
   loadTeamNamesToAdmin();
   enableInlineEditing();
 }
@@ -632,11 +652,12 @@ function showToast(msg, color='green') {
 }
 
 async function loadData() {
-  const [scoresRes, scorersRes, teamsRes, contentRes] = await Promise.all([
+  const [scoresRes, scorersRes, teamsRes, contentRes, playersRes] = await Promise.all([
     sb.from('scores').select('*'),
     sb.from('scorers').select('*').order('goals',{ascending:false}),
     sb.from('settings').select('*').eq('key','teams').single(),
-    sb.from('settings').select('*').eq('key','content').single()
+    sb.from('settings').select('*').eq('key','content').single(),
+    sb.from('players').select('*').order('created_at',{ascending:true})
   ]);
   if(scoresRes.data) {
     state.scores = {};
@@ -645,6 +666,7 @@ async function loadData() {
   if(scorersRes.data) state.scorers = scorersRes.data;
   if(teamsRes.data?.value) state.teams = {...state.teams, ...JSON.parse(teamsRes.data.value)};
   if(contentRes.data?.value) { state.content = JSON.parse(contentRes.data.value); applyContent(state.content); }
+  if(playersRes.data) state.players = playersRes.data;
   renderAll();
   loadTeamNamesToAdmin();
 }
@@ -717,6 +739,25 @@ function renderAll() {
   renderMixedBracket();
   renderBoot();
   renderSchedule();
+  renderPlayersPublic();
+}
+
+function renderPlayersPublic() {
+  const el = document.getElementById('players-public-list');
+  if(!el) return;
+  if(state.players.length===0){el.innerHTML='<div class="empty-state">No players added yet</div>';return;}
+  const grouped = {};
+  TEAMS.forEach(t=>grouped[t]=[]);
+  state.players.forEach(p => { if(!grouped[p.team]) grouped[p.team]=[]; grouped[p.team].push(p); });
+  let html = '';
+  TEAMS.forEach(t => {
+    const list = grouped[t]||[];
+    html += `<div style="margin-bottom:18px;">
+      <div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);">${tn(t)} <span style="color:var(--muted);font-weight:400;">(${list.length})</span></div>
+      ${list.length===0 ? '<div style="font-size:12px;color:var(--muted);">No players yet</div>' : list.map(p=>`<div style="font-size:13px;padding:5px 0;color:var(--text);">${p.name}</div>`).join('')}
+    </div>`;
+  });
+  el.innerHTML = html;
 }
 
 function renderSchedule() {
@@ -1020,8 +1061,53 @@ window.deleteScorer = async function(id) {
   renderBoot();renderAdminBoot();showToast('Removed');
 };
 
+function renderAdminPlayers() {
+  const sel = document.getElementById('admin-player-team');
+  if(sel) sel.innerHTML = TEAMS.map(t=>`<option value="${t}">${tn(t)}</option>`).join('');
+  const list = document.getElementById('admin-players-list');
+  if(!list) return;
+  if(state.players.length===0){list.innerHTML='<div class="empty-state">No players added yet</div>';return;}
+  list.innerHTML = state.players.map(p=>`
+    <div class="match-admin" style="margin-bottom:6px">
+      <div class="match-admin-teams">
+        <span class="match-admin-team" style="text-align:left;flex:1.5">${p.name}</span>
+        <select id="pteam_${p.id}" style="flex:0 0 90px;padding:6px 4px;border:1px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--text);font-size:12px;">
+          ${TEAMS.map(t=>`<option value="${t}" ${t===p.team?'selected':''}>${tn(t)}</option>`).join('')}
+        </select>
+        <button class="save-btn" onclick="movePlayer('${p.id}')">Save</button>
+        <button class="save-btn" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red);margin-left:4px" onclick="deletePlayer('${p.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+window.addPlayer = async function() {
+  const name = document.getElementById('admin-player-name').value.trim();
+  const team = document.getElementById('admin-player-team').value;
+  if(!name){showToast('Enter player name','red');return;}
+  const {data,error} = await sb.from('players').insert({name,team}).select().single();
+  if(error){showToast('Save failed — check Supabase','red');return;}
+  if(data){state.players.push(data);document.getElementById('admin-player-name').value='';}
+  renderPlayersPublic();renderAdminPlayers();showToast('Player added ✓');
+};
+
+window.movePlayer = async function(id) {
+  const team = document.getElementById('pteam_'+id).value;
+  const {error} = await sb.from('players').update({team}).eq('id',id);
+  if(error){showToast('Save failed','red');return;}
+  const p = state.players.find(x=>x.id===id);
+  if(p) p.team = team;
+  renderPlayersPublic();renderAdminPlayers();showToast('Player moved ✓');
+};
+
+window.deletePlayer = async function(id) {
+  await sb.from('players').delete().eq('id',id);
+  state.players = state.players.filter(x=>x.id!==id);
+  renderPlayersPublic();renderAdminPlayers();showToast('Removed');
+};
+
 sb.channel('scores').on('postgres_changes',{event:'*',schema:'public',table:'scores'},()=>loadData()).subscribe();
 sb.channel('scorers').on('postgres_changes',{event:'*',schema:'public',table:'scorers'},()=>loadData()).subscribe();
+sb.channel('players').on('postgres_changes',{event:'*',schema:'public',table:'players'},()=>loadData()).subscribe();
 
 if(sessionStorage.getItem('slc_admin')==='1') { unlockAdmin(); }
 
