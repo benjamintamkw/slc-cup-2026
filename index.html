@@ -215,39 +215,80 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
 <div class="page" id="page-schedule">
   <div class="card">
     <div class="card-label">📅 Full day schedule — 19–20 July 2026 · 5 teams</div>
-    <div class="schedule-block">
-      <h3>🏆 SLC Cup — Round Robin (2:30–3:35pm)</h3>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_s1_time">2:30pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_s1_title">Warmup + opening prayer + draw</div><div class="sched-sub editable" contenteditable="false" data-key="sch_s1_sub">Both courts</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_r1_time">2:35pm</div><div class="sched-content"><div class="sched-title">Round 1 <span class="court-pill c1">C1</span> + <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-r1"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_r2_time">2:47pm</div><div class="sched-content"><div class="sched-title">Round 2 <span class="court-pill c1">C1</span> + <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-r2"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_r3_time">2:59pm</div><div class="sched-content"><div class="sched-title">Round 3 <span class="court-pill c1">C1</span> + <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-r3"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_r4_time">3:11pm</div><div class="sched-content"><div class="sched-title">Round 4 <span class="court-pill c1">C1</span> + <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-r4"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_r5_time">3:23pm</div><div class="sched-content"><div class="sched-title">Round 5 <span class="court-pill c1">C1</span></div><div class="sched-sub"><span id="sch-r5"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_s5_time">3:35pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_s5_title">Standings calculated + mixed team draw</div><div class="sched-sub editable" contenteditable="false" data-key="sch_s5_sub">10 min break</div></div></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px;">📍 <strong style="color:var(--text)">SFH@Sims</strong>, 1 Lor 23 Geylang, S388352 · Pitches F3 & F4</div>
+
+    <h3 style="font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);">🏆 SLC Cup — Round Robin (2:30–3:35pm)</h3>
+    <div style="overflow-x:auto;margin-bottom:20px;">
+      <table class="sched-table" style="width:100%;border-collapse:collapse;font-size:12px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);">
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Time</th>
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F3</th>
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F4</th>
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Referee</th>
+          </tr>
+        </thead>
+        <tbody id="sched-table-body"></tbody>
+      </table>
     </div>
-    <div class="schedule-block">
-      <h3>🏆 SLC Cup — Final (3:45–3:57pm)</h3>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_k1_time">3:45pm</div><div class="sched-content"><div class="sched-title">Final (1st vs 2nd) <span class="court-pill c1">C1</span> + 3rd place (3rd vs 4th) <span class="court-pill c2">C2</span></div><div class="sched-sub editable" contenteditable="false" data-key="sch_k1_sub">Simultaneously · 5th place has the bye</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_k4_time">3:57pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_k4_title">🏆 SLC Cup champion crowned!</div></div></div>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_s5_time">3:35pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_s5_title">Standings calculated + mixed team draw</div><div class="sched-sub editable" contenteditable="false" data-key="sch_s5_sub">10 min break</div></div></div>
+
+    <h3 style="font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);">🏆 SLC Cup — Final (3:47–3:59pm)</h3>
+    <div style="overflow-x:auto;margin-bottom:12px;">
+      <table class="sched-table" style="width:100%;border-collapse:collapse;font-size:12px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);">
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Time</th>
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F3</th>
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px 6px;font-family:'DM Mono',monospace;color:var(--gold);">3:47pm</td>
+            <td style="padding:8px 6px;"><strong>Final:</strong> <span id="sch-final-teams">1st vs 2nd</span></td>
+            <td style="padding:8px 6px;"><strong>3rd place:</strong> <span id="sch-tp-teams">3rd vs 4th</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="schedule-block">
-      <h3>🔀 Mixed Cup (3:57–4:35pm)</h3>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m0_time">3:57pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_m0_title">Mixed team draw + bib swap</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m1_time">4:05pm</div><div class="sched-content"><div class="sched-title">Mixed SF1 <span class="court-pill c1">C1</span> + Mixed SF2 <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-msf"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m2_time">4:17pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_m2_title">Break + finalists prep</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m3_time">4:23pm</div><div class="sched-content"><div class="sched-title">Mixed Cup Final <span class="court-pill c1">C1</span> + 3rd place <span class="court-pill c2">C2</span></div><div class="sched-sub"><span id="sch-mfin"></span></div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m4_time">4:35pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_m4_title">🔀 Mixed Cup champion crowned!</div></div></div>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_k4_time">3:59pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_k4_title">🏆 SLC Cup champion crowned!</div></div></div>
+
+    <h3 style="font-size:12px;font-weight:600;color:var(--purple);letter-spacing:.06em;text-transform:uppercase;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);">🔀 Mixed Cup (3:59–4:37pm)</h3>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m0_time">3:59pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_m0_title">Mixed team draw + bib swap</div></div></div>
+    <div style="overflow-x:auto;margin:8px 0 12px;">
+      <table class="sched-table" style="width:100%;border-collapse:collapse;font-size:12px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border);">
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Time</th>
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F3</th>
+            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px 6px;font-family:'DM Mono',monospace;color:var(--purple);">4:07pm</td>
+            <td style="padding:8px 6px;" id="sch-msf1-teams">Mixed SF1</td>
+            <td style="padding:8px 6px;" id="sch-msf2-teams">Mixed SF2</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 6px;font-family:'DM Mono',monospace;color:var(--purple);">4:25pm</td>
+            <td style="padding:8px 6px;" id="sch-mfinal-teams">Mixed Final</td>
+            <td style="padding:8px 6px;" id="sch-mtp-teams">Mixed 3rd place</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="schedule-block">
-      <h3>🥇 Prize Giving + Evening</h3>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e1_time">4:35pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e1_title">Prize giving + group photo + closing prayer</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e2_time">5:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e2_title">Head home for dinner</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e2_sub">Families with kids — go home, rest, get kids settled</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e3_time">8:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e3_title">Return to church — sleepover begins</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e3_sub">Sleeping bags, snacks, games, projector setup</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e4_time">9:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e4_title">Fellowship sharing + devotion</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e5_time">11:30pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e5_title">Pre-match build-up on Channel 5</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e6_time">3:00am</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e6_title">📺 FIFA World Cup Final — KICKOFF!</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e6_sub">Free on Mediacorp Channel 5 · Mon 20 Jul</div></div></div>
-      <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e7_time">~5:15am</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e7_title">Full time + closing prayer + breakfast</div></div></div>
-    </div>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m4_time">4:37pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_m4_title">🔀 Mixed Cup champion crowned!</div></div></div>
+
+    <h3 style="font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);">🥇 Prize Giving + Evening</h3>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e1_time">4:37pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e1_title">Prize giving + group photo + closing prayer</div></div></div>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e2_time">5:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e2_title">Head home for dinner</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e2_sub">Families with kids — go home, rest, get kids settled</div></div></div>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e3_time">8:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e3_title">Return to church — sleepover begins</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e3_sub">Sleeping bags, snacks, games, projector setup</div></div></div>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e4_time">9:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e4_title">Fellowship sharing + devotion</div></div></div>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e5_time">11:30pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e5_title">Pre-match build-up on Channel 5</div></div></div>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e6_time">3:00am</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e6_title">📺 FIFA World Cup Final — KICKOFF!</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e6_sub">Free on Mediacorp Channel 5 · Mon 20 Jul · @ SLC L5 MPH1</div></div></div>
+    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e7_time">~5:15am</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e7_title">Full time + closing prayer + breakfast</div></div></div>
   </div>
 </div>
 
@@ -475,30 +516,30 @@ const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const TEAMS = ['A','B','C','D','E'];
 
-// 5-team round robin, balanced so no team has 2 consecutive byes
-// Each round, one team sits out (Court 2 empty in round 5)
+// Correct 5-team round robin (circle method) — 10 matches total, each team plays 4, byes/referees once
 const RR_MATCHES = [
-  {id:'r1a',round:1,h:'A',a:'B',court:'C1',time:'2:35pm'},
-  {id:'r1b',round:1,h:'C',a:'D',court:'C2',time:'2:35pm'},   // E byes R1
-  {id:'r2a',round:2,h:'E',a:'A',court:'C1',time:'2:47pm'},
-  {id:'r2b',round:2,h:'B',a:'C',court:'C2',time:'2:47pm'},   // D byes R2
-  {id:'r3a',round:3,h:'D',a:'E',court:'C1',time:'2:59pm'},
-  {id:'r3b',round:3,h:'A',a:'C',court:'C2',time:'2:59pm'},   // B byes R3
-  {id:'r4a',round:4,h:'B',a:'D',court:'C1',time:'3:11pm'},
-  {id:'r4b',round:4,h:'C',a:'E',court:'C2',time:'3:11pm'},   // A byes R4
-  {id:'r5a',round:5,h:'A',a:'D',court:'C1',time:'3:23pm'},   // B,C,E byes R5 (only 1 game slot left)
+  {id:'r1a',round:1,h:'B',a:'E',court:'C1',time:'2:35pm'},
+  {id:'r1b',round:1,h:'C',a:'D',court:'C2',time:'2:35pm'},
+  {id:'r2a',round:2,h:'A',a:'E',court:'C1',time:'2:47pm'},
+  {id:'r2b',round:2,h:'B',a:'C',court:'C2',time:'2:47pm'},
+  {id:'r3a',round:3,h:'A',a:'D',court:'C1',time:'2:59pm'},
+  {id:'r3b',round:3,h:'E',a:'C',court:'C2',time:'2:59pm'},
+  {id:'r4a',round:4,h:'A',a:'C',court:'C1',time:'3:11pm'},
+  {id:'r4b',round:4,h:'D',a:'B',court:'C2',time:'3:11pm'},
+  {id:'r5a',round:5,h:'A',a:'B',court:'C1',time:'3:23pm'},
+  {id:'r5b',round:5,h:'D',a:'E',court:'C2',time:'3:23pm'},
 ];
-const BYES = {1:'E',2:'D',3:'B',4:'A',5:null};
+const BYES = {1:'A',2:'D',3:'B',4:'E',5:'C'};
 
 const KO_MATCHES = [
-  {id:'final',label:'SLC Cup Final',name:'1st vs 2nd',time:'3:45pm',court:'C1'},
-  {id:'tp',label:'3rd place',name:'3rd vs 4th',time:'3:45pm',court:'C2'},
+  {id:'final',label:'SLC Cup Final',name:'1st vs 2nd',time:'3:47pm',court:'C1'},
+  {id:'tp',label:'3rd place',name:'3rd vs 4th',time:'3:47pm',court:'C2'},
 ];
 const MX_MATCHES = [
-  {id:'msf1',label:'Mixed SF1',time:'4:05pm',court:'C1'},
-  {id:'msf2',label:'Mixed SF2',time:'4:05pm',court:'C2'},
-  {id:'mtp',label:'Mixed 3rd place',time:'4:23pm',court:'C2'},
-  {id:'mfinal',label:'Mixed Cup Final',time:'4:23pm',court:'C1'},
+  {id:'msf1',label:'Mixed SF1',time:'4:07pm',court:'C1'},
+  {id:'msf2',label:'Mixed SF2',time:'4:07pm',court:'C2'},
+  {id:'mtp',label:'Mixed 3rd place',time:'4:25pm',court:'C2'},
+  {id:'mfinal',label:'Mixed Cup Final',time:'4:25pm',court:'C1'},
 ];
 
 let state = {
@@ -686,23 +727,38 @@ function renderAll() {
 }
 
 function renderSchedule() {
-  const names = {}; TEAMS.forEach(t=>names[t]=tn(t));
-  const byRound = {1:[],2:[],3:[],4:[],5:[]};
-  RR_MATCHES.forEach(m => byRound[m.round].push(`${names[m.h]} vs ${names[m.a]}`));
-  for(let r=1;r<=5;r++){
-    const el = document.getElementById('sch-r'+r);
-    if(!el) continue;
-    const bye = BYES[r];
-    let txt = byRound[r].join(' · ');
-    if(bye) txt += ` <span class="ref-pill">🟨 ${tn(bye)} referees</span>`;
-    el.innerHTML = txt;
+  const tbody = document.getElementById('sched-table-body');
+  if(tbody) {
+    const byRound = {1:[],2:[],3:[],4:[],5:[]};
+    RR_MATCHES.forEach(m => byRound[m.round].push(m));
+    let rows = '';
+    for(let r=1;r<=5;r++){
+      const ms = byRound[r];
+      const f3 = ms.find(m=>m.court==='C1');
+      const f4 = ms.find(m=>m.court==='C2');
+      const ref = BYES[r];
+      rows += `<tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px 6px;font-family:'DM Mono',monospace;color:var(--gold);">${f3?f3.time:''}</td>
+        <td style="padding:8px 6px;">${f3?tn(f3.h)+' vs '+tn(f3.a):'—'}</td>
+        <td style="padding:8px 6px;">${f4?tn(f4.h)+' vs '+tn(f4.a):'—'}</td>
+        <td style="padding:8px 6px;color:var(--gold);font-weight:500;">🟨 ${tn(ref)}</td>
+      </tr>`;
+    }
+    tbody.innerHTML = rows;
   }
+
+  const stats = calcStats();
+  const ord = sortedTeams(stats);
+  setEl2('sch-final-teams', `${tn(ord[0])} vs ${tn(ord[1])}`);
+  setEl2('sch-tp-teams', `${tn(ord[2])} vs ${tn(ord[3])}`);
+
   const M1=tn('M1'),M2=tn('M2'),M3=tn('M3'),M4=tn('M4');
-  const sm=document.getElementById('sch-msf');
-  const sf=document.getElementById('sch-mfin');
-  if(sm) sm.textContent = `${M1} vs ${M2} · ${M3} vs ${M4}`;
-  if(sf) sf.textContent = `${M1}/${M2} winner vs ${M3}/${M4} winner`;
+  setEl2('sch-msf1-teams', `<strong>Mixed SF1:</strong> ${M1} vs ${M2}`);
+  setEl2('sch-msf2-teams', `<strong>Mixed SF2:</strong> ${M3} vs ${M4}`);
+  setEl2('sch-mfinal-teams', `<strong>Final:</strong> ${M1}/${M2} winner vs ${M3}/${M4} winner`);
+  setEl2('sch-mtp-teams', `<strong>3rd place:</strong> ${M1}/${M2} loser vs ${M3}/${M4} loser`);
 }
+function setEl2(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
 
 function renderScores() {
   const rrEl = document.getElementById('scores-rr');
