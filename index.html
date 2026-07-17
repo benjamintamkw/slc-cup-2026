@@ -749,8 +749,14 @@ function renderSchedule() {
 
   const stats = calcStats();
   const ord = sortedTeams(stats);
-  setEl2('sch-final-teams', `${tn(ord[0])} vs ${tn(ord[1])}`);
-  setEl2('sch-tp-teams', `${tn(ord[2])} vs ${tn(ord[3])}`);
+  const rrComplete = RR_MATCHES.every(m => sc(m.id) !== null);
+  if(rrComplete) {
+    setEl2('sch-final-teams', `${tn(ord[0])} vs ${tn(ord[1])}`);
+    setEl2('sch-tp-teams', `${tn(ord[2])} vs ${tn(ord[3])}`);
+  } else {
+    setEl2('sch-final-teams', `TBD`);
+    setEl2('sch-tp-teams', `TBD`);
+  }
 
   const M1=tn('M1'),M2=tn('M2'),M3=tn('M3'),M4=tn('M4');
   setEl2('sch-msf1-teams', `<strong>Mixed SF1:</strong> ${M1} vs ${M2}`);
@@ -780,7 +786,10 @@ function renderScores() {
 
   const stats = calcStats();
   const ord = sortedTeams(stats);
-  const koNames = {final:{h:tn(ord[0]),a:tn(ord[1])}, tp:{h:tn(ord[2]),a:tn(ord[3])}};
+  const rrComplete = RR_MATCHES.every(m => sc(m.id) !== null);
+  const koNames = rrComplete
+    ? {final:{h:tn(ord[0]),a:tn(ord[1])}, tp:{h:tn(ord[2]),a:tn(ord[3])}}
+    : {final:{h:'TBD',a:'TBD'}, tp:{h:'TBD',a:'TBD'}};
   koEl.innerHTML = KO_MATCHES.map(m => {
     const s = sc(m.id);
     const names = koNames[m.id];
@@ -839,16 +848,18 @@ function clrW(id1,id2){[id1,id2].forEach(id=>{const el=document.getElementById(i
 function renderSLCBracket() {
   const stats = calcStats();
   const ord = sortedTeams(stats);
-  const p = [tn(ord[0]),tn(ord[1]),tn(ord[2]),tn(ord[3])];
+  const rrComplete = RR_MATCHES.every(m => sc(m.id) !== null);
+  const p = rrComplete ? [tn(ord[0]),tn(ord[1]),tn(ord[2]),tn(ord[3])] : ['TBD','TBD','TBD','TBD'];
   setEl('finn1',p[0]); setEl('finn2',p[1]);
   setEl('tpn1',p[2]); setEl('tpn2',p[3]);
 
   const fin=sc('final'), tp=sc('tp');
-  if(fin){setEl('fins1',fin.home);setEl('fins2',fin.away);
+  if(rrComplete && fin){setEl('fins1',fin.home);setEl('fins2',fin.away);
     if(fin.home!==fin.away){setW('fint1','fint2',fin.home>fin.away);const champ=fin.home>fin.away?p[0]:p[1];const b=document.getElementById('slc-banner');b.style.display='block';setEl('slc-champ',champ);}
     else clrW('fint1','fint2');
-  }
-  if(tp){setEl('tps1',tp.home);setEl('tps2',tp.away);if(tp.home!==tp.away)setW('tpt1','tpt2',tp.home>tp.away);else clrW('tpt1','tpt2');}
+  } else { setEl('fins1','–'); setEl('fins2','–'); clrW('fint1','fint2'); }
+  if(rrComplete && tp){setEl('tps1',tp.home);setEl('tps2',tp.away);if(tp.home!==tp.away)setW('tpt1','tpt2',tp.home>tp.away);else clrW('tpt1','tpt2');}
+  else { setEl('tps1','–'); setEl('tps2','–'); clrW('tpt1','tpt2'); }
 }
 
 function renderMixedBracket() {
@@ -917,7 +928,10 @@ function renderAdminScores() {
     </div>`;
   }).join('');
 
-  const koNames = {final:{h:tn(ord[0]),a:tn(ord[1])}, tp:{h:tn(ord[2]),a:tn(ord[3])}};
+  const rrComplete2 = RR_MATCHES.every(m => sc(m.id) !== null);
+  const koNames = rrComplete2
+    ? {final:{h:tn(ord[0]),a:tn(ord[1])}, tp:{h:tn(ord[2]),a:tn(ord[3])}}
+    : {final:{h:'TBD (finish round robin)',a:'TBD'}, tp:{h:'TBD (finish round robin)',a:'TBD'}};
   koEl.innerHTML = KO_MATCHES.map(m => {
     const s=sc(m.id);
     const names=koNames[m.id];
