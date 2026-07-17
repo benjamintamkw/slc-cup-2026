@@ -669,6 +669,10 @@ async function loadData() {
   if(playersRes.data) state.players = playersRes.data;
   renderAll();
   loadTeamNamesToAdmin();
+  if(document.getElementById('admin-panel')?.style.display === 'block') {
+    renderAdminBoot();
+    renderAdminPlayers();
+  }
 }
 
 async function saveScore(matchId, home, away) {
@@ -1109,9 +1113,9 @@ sb.channel('scores').on('postgres_changes',{event:'*',schema:'public',table:'sco
 sb.channel('scorers').on('postgres_changes',{event:'*',schema:'public',table:'scorers'},()=>loadData()).subscribe();
 sb.channel('players').on('postgres_changes',{event:'*',schema:'public',table:'players'},()=>loadData()).subscribe();
 
-if(sessionStorage.getItem('slc_admin')==='1') { unlockAdmin(); }
-
-loadData();
+loadData().then(() => {
+  if(sessionStorage.getItem('slc_admin')==='1') { unlockAdmin(); }
+});
 </script>
 </body>
 </html>
