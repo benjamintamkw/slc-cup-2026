@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Singapore Life Church Cup 2026</title>
+<title>SLC Cup</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@500&display=swap');
@@ -14,7 +14,6 @@
   --green:#22c55e;--green-bg:rgba(34,197,94,.12);
   --gold:#f59e0b;--gold-bg:rgba(245,158,11,.12);
   --blue:#60a5fa;--blue-bg:rgba(96,165,250,.12);
-  --purple:#a78bfa;--purple-bg:rgba(167,139,250,.12);
   --red:#f87171;--red-bg:rgba(248,113,113,.12);
   --r:12px;--rs:8px;
 }
@@ -38,12 +37,10 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20
 .badge{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:600;}
 .badge-gold{background:var(--gold-bg);color:var(--gold);}
 .badge-blue{background:var(--blue-bg);color:var(--blue);}
-.badge-purple{background:var(--purple-bg);color:var(--purple);}
 .badge-green{background:var(--green-bg);color:var(--green);}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px;}
 .card-label{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:6px;}
 .schedule-block{margin-bottom:20px;}
-.schedule-block h3{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
 .sched-row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
 .sched-row:last-child{border-bottom:none;}
 .sched-time{font-family:'DM Mono',monospace;font-size:12px;color:var(--gold);min-width:80px;padding-top:1px;}
@@ -52,9 +49,7 @@ nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 20
 .sched-sub{font-size:11px;color:var(--muted);margin-top:2px;}
 .court-pill{display:inline-block;font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle;}
 .c1{background:var(--blue-bg);color:var(--blue);}
-.c2{background:var(--purple-bg);color:var(--purple);}
-.bye-pill{display:inline-block;font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:6px;background:var(--surface2);color:var(--muted);}
-.ref-pill{display:inline-block;font-size:10px;font-weight:600;padding:1px 6px;border-radius:4px;margin-left:6px;background:var(--gold-bg);color:var(--gold);}
+.c2{background:rgba(167,139,250,.12);color:#a78bfa;}
 table.standings{width:100%;border-collapse:collapse;font-size:12px;}
 table.standings th{font-size:10px;font-weight:600;color:var(--muted);text-align:center;padding:7px 3px;border-bottom:1px solid var(--border);letter-spacing:.04em;}
 table.standings th:first-child{text-align:left;}
@@ -80,10 +75,8 @@ table.standings td:first-child{text-align:left;}
 .bracket-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
 .bk-match{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);overflow:hidden;}
 .bk-match.final{border-color:var(--gold);}
-.bk-match.mixed-final{border-color:var(--purple);}
 .bk-header{font-size:10px;font-weight:600;color:var(--muted);padding:6px 10px;background:var(--surface);border-bottom:1px solid var(--border);}
 .bk-match.final .bk-header{color:var(--gold);}
-.bk-match.mixed-final .bk-header{color:var(--purple);}
 .bk-team{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid var(--border);}
 .bk-team:last-child{border-bottom:none;}
 .bk-team.winner{background:var(--green-bg);}
@@ -91,10 +84,8 @@ table.standings td:first-child{text-align:left;}
 .bk-name{font-size:12px;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .bk-score{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--text);min-width:16px;text-align:right;}
 .champ-banner{background:var(--gold-bg);border:1px solid var(--gold);border-radius:var(--r);padding:20px;text-align:center;margin-top:12px;display:none;}
-.champ-banner.purple{background:var(--purple-bg);border-color:var(--purple);}
 .champ-banner .icon{font-size:32px;display:block;margin-bottom:8px;}
 .champ-banner .label{font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);}
-.champ-banner.purple .label{color:var(--purple);}
 .champ-banner .name{font-size:22px;font-weight:700;margin-top:4px;}
 .gb-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);}
 .gb-row:last-child{border-bottom:none;}
@@ -121,7 +112,6 @@ table.standings td:first-child{text-align:left;}
 .btn:active{opacity:.8;}
 .btn-gold{background:var(--gold);color:#000;}
 .btn-surface{background:var(--surface2);color:var(--text);border:1px solid var(--border);}
-.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red);}
 .match-admin{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:12px;margin-bottom:8px;}
 .match-admin-header{font-size:11px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
 .match-admin-teams{display:flex;align-items:center;gap:8px;}
@@ -153,27 +143,29 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
 .save-bar-msg{font-size:12px;color:var(--muted);}
 .save-bar-msg span{color:var(--gold);font-weight:600;}
 .save-bar-btns{display:flex;gap:8px;}
-.row-hide-toggle{font-size:11px;color:var(--red);cursor:pointer;padding:4px 8px;border:1px solid var(--red);border-radius:4px;background:var(--red-bg);white-space:nowrap;}
-.row-hidden{opacity:.35;}
 .admin-row-controls{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
+.gallery-item{position:relative;border-radius:var(--rs);overflow:hidden;border:1px solid var(--border);aspect-ratio:1;background:var(--surface2);}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;}
+.gallery-item .cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font-size:10px;padding:14px 6px 5px;}
+.admin-sub-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
+.admin-sub-tab{padding:6px 12px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface2);color:var(--muted);}
+.admin-sub-tab.active{background:var(--gold);color:#000;border-color:var(--gold);}
+.admin-sub-content{display:none;}
+.admin-sub-content.active{display:block;}
 </style>
 </head>
 <body>
 
-<header style="display:none"></header>
 <nav>
   <div class="nav-inner">
     <div class="nav-logo">⚽ <span>SLC</span> Cup</div>
     <div class="nav-tabs">
       <button class="nav-tab active" data-page="home">Home</button>
-      <button class="nav-tab" data-page="schedule">Schedule</button>
-      <button class="nav-tab" data-page="scores">Scores</button>
-      <button class="nav-tab" data-page="table">Table</button>
+      <button class="nav-tab" data-page="matches">Matches</button>
       <button class="nav-tab" data-page="slccup">🏆 SLC Cup</button>
-      <button class="nav-tab" data-page="mixed">🔀 Mixed</button>
-      <button class="nav-tab" data-page="boot">👟 Boot</button>
-      <button class="nav-tab" data-page="players">👥 Players</button>
-      <button class="nav-tab" data-page="rules">Rules</button>
+      <button class="nav-tab" data-page="gallery">📸 Gallery</button>
+      <button class="nav-tab" data-page="history">📜 History</button>
       <button class="nav-tab" data-page="admin">Admin</button>
     </div>
   </div>
@@ -192,32 +184,38 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
 <div class="page active" id="page-home">
   <div class="hero">
     <span class="hero-icon">⚽</span>
-    <h1>Singapore Life Church <span>Cup 2026</span></h1>
-    <p class="editable" contenteditable="false" data-key="home_tagline">19 July 2026 · Two tournaments · One unforgettable day</p>
+    <h1>Singapore Life Church <span>Cup</span></h1>
+    <p class="editable" contenteditable="false" data-key="home_tagline">An inter-church, inter-fellowship futsal tournament — matching World Cup energy</p>
     <div class="hero-badges">
       <span class="badge badge-gold">🏆 SLC Cup</span>
-      <span class="badge badge-purple">🔀 Mixed Cup</span>
       <span class="badge badge-green">✝️ Playing for His glory</span>
+      <span class="badge" style="background:var(--surface2);color:var(--muted);">👀 <span id="view-count">–</span> views</span>
     </div>
   </div>
+
+  <div class="card" id="home-champion-card" style="display:none;">
+    <div class="card-label">🏆 Final Results</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">🥇</span><div><div style="font-size:15px;font-weight:700;color:var(--gold);" id="home-1st"></div><div style="font-size:11px;color:var(--muted);">Champion</div></div></div>
+      <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">🥈</span><div><div style="font-size:14px;font-weight:600;" id="home-2nd"></div><div style="font-size:11px;color:var(--muted);">Runner-up</div></div></div>
+      <div style="display:flex;align-items:center;gap:10px;"><span style="font-size:20px;">🥉</span><div><div style="font-size:14px;font-weight:600;" id="home-3rd"></div><div style="font-size:11px;color:var(--muted);">3rd place</div></div></div>
+    </div>
+  </div>
+
   <div class="card">
-    <div class="card-label">📅 The day</div>
-    <div class="rule-row"><span class="rule-icon">⚽</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t1">2:30pm</strong> — <span class="editable" contenteditable="false" data-key="home_t1b">Futsal tournament begins (2 courts, 5-a-side)</span></div></div>
-    <div class="rule-row"><span class="rule-icon">🏆</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t2">3:45pm</strong> — <span class="editable" contenteditable="false" data-key="home_t2b">SLC Cup Final</span></div></div>
-    <div class="rule-row"><span class="rule-icon">🔀</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t3">3:57pm</strong> — <span class="editable" contenteditable="false" data-key="home_t3b">Mixed Cup begins</span></div></div>
-    <div class="rule-row"><span class="rule-icon">🥇</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t4">4:35pm</strong> — <span class="editable" contenteditable="false" data-key="home_t4b">Prize giving</span></div></div>
-    <div class="rule-row"><span class="rule-icon">🎉</span><div class="rule-text"><strong class="editable" contenteditable="false" data-key="home_t5">4:30–5:00pm</strong> — <span class="editable" contenteditable="false" data-key="home_t5b">Prize giving, group photo & closing prayer</span></div></div>
+    <div class="card-label">📅 About</div>
+    <div class="rule-row"><span class="rule-icon">⚽</span><div class="rule-text editable" contenteditable="false" data-key="home_about1">5-a-side futsal, round robin league, top 2 teams played the Final.</div></div>
+    <div class="rule-row"><span class="rule-icon">📍</span><div class="rule-text editable" contenteditable="false" data-key="home_about2">SFH@Sims, 1 Lor 23 Geylang, Singapore 388352</div></div>
+    <div class="rule-row"><span class="rule-icon">🤝</span><div class="rule-text editable" contenteditable="false" data-key="home_about3">Open to all — church family, external friends, and guest churches.</div></div>
   </div>
 </div>
 
-<!-- SCHEDULE -->
-<div class="page" id="page-schedule">
+<!-- MATCHES -->
+<div class="page" id="page-matches">
   <div class="card">
-    <div class="card-label">📅 Full day schedule — 19–20 July 2026 · 5 teams</div>
+    <div class="card-label">📅 Schedule &amp; results</div>
     <div style="font-size:12px;color:var(--muted);margin-bottom:14px;">📍 <strong style="color:var(--text)">SFH@Sims</strong>, 1 Lor 23 Geylang, S388352 · Pitches F3 & F4</div>
-
-    <h3 style="font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);">🏆 SLC Cup — Round Robin (2:30–3:35pm)</h3>
-    <div style="overflow-x:auto;margin-bottom:20px;">
+    <div style="overflow-x:auto;margin-bottom:12px;">
       <table class="sched-table" style="width:100%;border-collapse:collapse;font-size:12px;">
         <thead>
           <tr style="border-bottom:1px solid var(--border);">
@@ -230,82 +228,19 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
         <tbody id="sched-table-body"></tbody>
       </table>
     </div>
-    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_s5_time">3:35pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_s5_title">Standings calculated + mixed team draw</div><div class="sched-sub editable" contenteditable="false" data-key="sch_s5_sub">10 min break</div></div></div>
-
-    <h3 style="font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);">🏆 SLC Cup — Final (3:47–3:59pm)</h3>
-    <div style="overflow-x:auto;margin-bottom:12px;">
-      <table class="sched-table" style="width:100%;border-collapse:collapse;font-size:12px;">
-        <thead>
-          <tr style="border-bottom:1px solid var(--border);">
-            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Time</th>
-            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F3</th>
-            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F4</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--border);">
-            <td style="padding:8px 6px;font-family:'DM Mono',monospace;color:var(--gold);">3:47pm</td>
-            <td style="padding:8px 6px;"><strong>Final:</strong> <span id="sch-final-teams">1st vs 2nd</span></td>
-            <td style="padding:8px 6px;"><strong>3rd place:</strong> <span id="sch-tp-teams">3rd vs 4th</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_k4_time">3:59pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_k4_title">🏆 SLC Cup champion crowned!</div></div></div>
-
-    <h3 style="font-size:12px;font-weight:600;color:var(--purple);letter-spacing:.06em;text-transform:uppercase;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);">🔀 Mixed Cup (3:59–4:37pm)</h3>
-    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m0_time">3:59pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_m0_title">Mixed team draw + bib swap</div></div></div>
-    <div style="overflow-x:auto;margin:8px 0 12px;">
-      <table class="sched-table" style="width:100%;border-collapse:collapse;font-size:12px;">
-        <thead>
-          <tr style="border-bottom:1px solid var(--border);">
-            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Time</th>
-            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F3</th>
-            <th style="text-align:left;padding:7px 6px;color:var(--muted);font-size:10px;font-weight:600;">Pitch F4</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid var(--border);">
-            <td style="padding:8px 6px;font-family:'DM Mono',monospace;color:var(--purple);">4:07pm</td>
-            <td style="padding:8px 6px;" id="sch-msf1-teams">Mixed SF1</td>
-            <td style="padding:8px 6px;" id="sch-msf2-teams">Mixed SF2</td>
-          </tr>
-          <tr>
-            <td style="padding:8px 6px;font-family:'DM Mono',monospace;color:var(--purple);">4:25pm</td>
-            <td style="padding:8px 6px;" id="sch-mfinal-teams">Mixed Final</td>
-            <td style="padding:8px 6px;" id="sch-mtp-teams">Mixed 3rd place</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_m4_time">4:37pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_m4_title">🔀 Mixed Cup champion crowned!</div></div></div>
-
-    <h3 style="font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);">🥇 Prize Giving + Evening</h3>
-    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e1_time">4:37pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e1_title">Prize giving + group photo + closing prayer</div></div></div>
-    <div class="sched-row"><div class="sched-time editable" contenteditable="false" data-key="sch_e2_time">5:00pm</div><div class="sched-content"><div class="sched-title editable" contenteditable="false" data-key="sch_e2_title">Event ends — head home</div><div class="sched-sub editable" contenteditable="false" data-key="sch_e2_sub">Thanks for playing — see you next time!</div></div></div>
   </div>
-</div>
 
-<!-- SCORES -->
-<div class="page" id="page-scores">
   <div class="card">
     <div class="card-label">
-      ⚽ Live match scores
-      <div class="live-indicator" style="margin-left:auto"><div class="live-dot"></div>Live</div>
+      ⚽ Match scores
     </div>
-    <div class="section-label">🏆 SLC Cup — Round Robin (5 teams)</div>
     <div id="scores-rr"></div>
-    <div class="section-label" style="margin-top:16px">🏆 SLC Cup — Final</div>
+    <div class="section-label" style="margin-top:16px">🏆 Final &amp; 3rd place</div>
     <div id="scores-ko"></div>
-    <div class="section-label" style="margin-top:16px">🔀 Mixed Cup</div>
-    <div id="scores-mixed"></div>
   </div>
-</div>
 
-<!-- TABLE -->
-<div class="page" id="page-table">
   <div class="card">
-    <div class="card-label">🏆 SLC Cup — Group standings</div>
+    <div class="card-label">📊 Round robin standings</div>
     <table class="standings">
       <thead><tr><th style="width:32%">Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead>
       <tbody id="table-body"><tr><td colspan="9" class="empty-state">Waiting for scores...</td></tr></tbody>
@@ -316,16 +251,16 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
 <!-- SLC CUP -->
 <div class="page" id="page-slccup">
   <div class="card">
-    <div class="card-label">🏆 SLC Interfellowship Cup</div>
-    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">Top 2 from round robin go straight to the final · 3:45pm</p>
+    <div class="card-label">🏆 SLC Cup — Final</div>
+    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">Top 2 from round robin play the final</p>
     <div class="bracket-grid">
       <div class="bk-match final">
-        <div class="bk-header">SLC Cup Final · C1 · 1st vs 2nd</div>
+        <div class="bk-header">Final · 1st vs 2nd</div>
         <div class="bk-team" id="fint1"><span class="bk-name" id="finn1">1st place</span><span class="bk-score" id="fins1">–</span></div>
         <div class="bk-team" id="fint2"><span class="bk-name" id="finn2">2nd place</span><span class="bk-score" id="fins2">–</span></div>
       </div>
       <div class="bk-match">
-        <div class="bk-header">3rd place · C2 · 3rd vs 4th</div>
+        <div class="bk-header">3rd place · 3rd vs 4th</div>
         <div class="bk-team" id="tpt1"><span class="bk-name" id="tpn1">3rd place</span><span class="bk-score" id="tps1">–</span></div>
         <div class="bk-team" id="tpt2"><span class="bk-name" id="tpn2">4th place</span><span class="bk-score" id="tps2">–</span></div>
       </div>
@@ -336,48 +271,7 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
       <div class="name" id="slc-champ"></div>
     </div>
   </div>
-</div>
 
-<!-- MIXED CUP -->
-<div class="page" id="page-mixed">
-  <div class="card">
-    <div class="card-label">🔀 SLC Mixed Fellowship Cup</div>
-    <p style="font-size:11px;color:var(--muted);margin-bottom:14px;">Semis simultaneously · 4:05pm</p>
-    <div class="bracket-grid">
-      <div class="bk-match">
-        <div class="bk-header">Mixed SF1 · C1</div>
-        <div class="bk-team" id="msf1t1"><span class="bk-name" id="msf1n1">Mix 1</span><span class="bk-score" id="msf1s1">–</span></div>
-        <div class="bk-team" id="msf1t2"><span class="bk-name" id="msf1n2">Mix 2</span><span class="bk-score" id="msf1s2">–</span></div>
-      </div>
-      <div class="bk-match">
-        <div class="bk-header">Mixed SF2 · C2</div>
-        <div class="bk-team" id="msf2t1"><span class="bk-name" id="msf2n1">Mix 3</span><span class="bk-score" id="msf2s1">–</span></div>
-        <div class="bk-team" id="msf2t2"><span class="bk-name" id="msf2n2">Mix 4</span><span class="bk-score" id="msf2s2">–</span></div>
-      </div>
-    </div>
-    <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Final & 3rd place simultaneously · 4:23pm</p>
-    <div class="bracket-grid">
-      <div class="bk-match">
-        <div class="bk-header">3rd place · C2</div>
-        <div class="bk-team" id="mtp1"><span class="bk-name" id="mtpn1">SF1 loser</span><span class="bk-score" id="mtps1">–</span></div>
-        <div class="bk-team" id="mtp2"><span class="bk-name" id="mtpn2">SF2 loser</span><span class="bk-score" id="mtps2">–</span></div>
-      </div>
-      <div class="bk-match mixed-final">
-        <div class="bk-header">Mixed Cup Final · C1</div>
-        <div class="bk-team" id="mfin1"><span class="bk-name" id="mfinn1">SF1 winner</span><span class="bk-score" id="mfins1">–</span></div>
-        <div class="bk-team" id="mfin2"><span class="bk-name" id="mfinn2">SF2 winner</span><span class="bk-score" id="mfins2">–</span></div>
-      </div>
-    </div>
-    <div class="champ-banner purple" id="mixed-banner">
-      <span class="icon">🔀</span>
-      <div class="label">Mixed Cup Champions</div>
-      <div class="name" id="mixed-champ"></div>
-    </div>
-  </div>
-</div>
-
-<!-- GOLDEN BOOT -->
-<div class="page" id="page-boot">
   <div class="champ-banner" id="boot-banner" style="margin-bottom:12px;">
     <span class="icon">👟</span>
     <div class="label">Golden Boot Leader</div>
@@ -390,58 +284,19 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
   </div>
 </div>
 
-<!-- PLAYERS -->
-<div class="page" id="page-players">
+<!-- GALLERY -->
+<div class="page" id="page-gallery">
   <div class="card">
-    <div class="card-label">👥 Player list by team</div>
-    <div id="players-public-list"><div class="empty-state">No players added yet</div></div>
+    <div class="card-label">📸 Photo gallery</div>
+    <div id="gallery-public-grid"><div class="empty-state">No photos yet — check back soon!</div></div>
   </div>
 </div>
 
-<!-- RULES -->
-<div class="page" id="page-rules">
+<!-- HISTORY -->
+<div class="page" id="page-history">
   <div class="card">
-    <div class="card-label">📋 Rules & regulations</div>
-    <div class="rule-section">
-      <h3>⚽ General rules</h3>
-      <div class="rule-row"><span class="rule-icon">👕</span><div class="rule-text editable" contenteditable="false" data-key="rule_1"><strong>5-a-side</strong> — 5 players on pitch per team. Rolling subs, unlimited.</div></div>
-      <div class="rule-row"><span class="rule-icon">⏱</span><div class="rule-text editable" contenteditable="false" data-key="rule_2"><strong>12-minute games</strong> — straight time, no stoppage time. Referee's whistle is final.</div></div>
-      <div class="rule-row"><span class="rule-icon">👧</span><div class="rule-text editable" contenteditable="false" data-key="rule_3"><strong>Mixed gender</strong> — at least 2 female players on pitch at all times.</div></div>
-      <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text editable" contenteditable="false" data-key="rule_4"><strong>No sliding tackles</strong> — safety first. Sliding = free kick.</div></div>
-      <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text editable" contenteditable="false" data-key="rule_5"><strong>No heading</strong> — reduces collision risk on small courts.</div></div>
-      <div class="rule-row"><span class="rule-icon">🦶</span><div class="rule-text editable" contenteditable="false" data-key="rule_6"><strong>Kick-ins</strong> instead of throw-ins. Ball stationary, taken within 5 seconds.</div></div>
-      <div class="rule-row"><span class="rule-icon">5️⃣</span><div class="rule-text editable" contenteditable="false" data-key="rule_7"><strong>5-second rule</strong> on all restarts — kick-ins, corners, goal kicks, keeper distribution.</div></div>
-      <div class="rule-row"><span class="rule-icon">🧤</span><div class="rule-text editable" contenteditable="false" data-key="rule_8"><strong>Goalkeeper</strong> — no punting. Rolling or throwing only. Cannot be scored on directly from a kick-in.</div></div>
-      <div class="rule-row"><span class="rule-icon">🟨</span><div class="rule-text editable" contenteditable="false" data-key="rule_9"><strong>Yellow card</strong> — 2-minute sin bin, team plays short.</div></div>
-      <div class="rule-row"><span class="rule-icon">🟥</span><div class="rule-text editable" contenteditable="false" data-key="rule_10"><strong>Red card</strong> — player out for the rest of the tournament. No replacement.</div></div>
-      <div class="rule-row"><span class="rule-icon">✝️</span><div class="rule-text editable" contenteditable="false" data-key="rule_11"><strong>Spirit of the game</strong> — we play to honour God. Respect opponents, referees and teammates. Arguing with the referee = yellow card.</div></div>
-    </div>
-    <div class="rule-section">
-      <h3>📊 Points system</h3>
-      <div class="rule-row"><span class="rule-icon">✅</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts1"><strong>Win</strong> = 3 points</div></div>
-      <div class="rule-row"><span class="rule-icon">🤝</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts2"><strong>Draw</strong> = 1 point each</div></div>
-      <div class="rule-row"><span class="rule-icon">❌</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts3"><strong>Loss</strong> = 0 points</div></div>
-      <div class="rule-row"><span class="rule-icon">📊</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts4"><strong>Tiebreaker:</strong> Goal difference → Goals scored → Head-to-head → Penalty shootout</div></div>
-    </div>
-    <div class="rule-section">
-      <h3>⚡ Penalty shootout rules (MLS-style)</h3>
-      <div class="rule-row"><span class="rule-icon">🎯</span><div class="rule-text editable" contenteditable="false" data-key="rule_ko1"><strong>If level after 12 mins</strong> — straight to shootout. No extra time.</div></div>
-      <div class="rule-row"><span class="rule-icon">🏃</span><div class="rule-text editable" contenteditable="false" data-key="rule_ko2"><strong>MLS-style shootout</strong> — player starts at the 3/4 court line, dribbles in, must shoot before the D line.</div></div>
-      <div class="rule-row"><span class="rule-icon">🧤</span><div class="rule-text editable" contenteditable="false" data-key="rule_ko3"><strong>Goalkeeper</strong> starts on the line and can only move once the attacker touches the ball.</div></div>
-      <div class="rule-row"><span class="rule-icon">🎯</span><div class="rule-text editable" contenteditable="false" data-key="rule_ko4"><strong>3 kicks each</strong>, alternating. Sudden death if still level.</div></div>
-    </div>
-    <div class="rule-section">
-      <h3>🔀 Mixed Cup draw</h3>
-      <div class="rule-row"><span class="rule-icon">🎲</span><div class="rule-text editable" contenteditable="false" data-key="rule_mx1">Players randomly drawn into new mixed teams after the SLC Cup round robin.</div></div>
-      <div class="rule-row"><span class="rule-icon">🧩</span><div class="rule-text editable" contenteditable="false" data-key="rule_mx2">Each mixed team must have players from <strong>at least 2 different fellowships</strong>.</div></div>
-      <div class="rule-row"><span class="rule-icon">⚖️</span><div class="rule-text editable" contenteditable="false" data-key="rule_mx3">Draw master ensures gender balance across all mixed teams.</div></div>
-    </div>
-    <div class="rule-section">
-      <h3>🏅 Awards & prizes</h3>
-      <div class="rule-row"><span class="rule-icon">🏆</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw1"><strong>SLC Cup Champions</strong> — Grab vouchers for the winning team.</div></div>
-      <div class="rule-row"><span class="rule-icon">🔀</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw2"><strong>Mixed Cup Champions</strong> — Grab vouchers for the winning team.</div></div>
-      <div class="rule-row"><span class="rule-icon">👟</span><div class="rule-text editable" contenteditable="false" data-key="rule_aw3"><strong>Golden Boot</strong> — top scorer across both tournaments, Grab voucher.</div></div>
-    </div>
+    <div class="card-label">📜 SLC Cup History</div>
+    <div id="history-public-list"><div class="empty-state">No history recorded yet</div></div>
   </div>
 </div>
 
@@ -451,7 +306,7 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
     <div class="card">
       <div class="card-label">🔒 Admin access</div>
       <div class="admin-lock">
-        <p>Enter the admin PIN to update scores and manage the tournament.</p>
+        <p>Enter the admin PIN to manage the site.</p>
         <input type="password" class="pin-input" id="pin-input" placeholder="••••" maxlength="4">
         <br><br>
         <button class="btn btn-gold" onclick="checkPin()">Unlock</button>
@@ -459,60 +314,136 @@ body.admin-mode .editable:focus{outline:2px solid var(--gold);background:rgba(24
     </div>
   </div>
   <div id="admin-panel" style="display:none">
-    <div class="card">
-      <div class="card-label">⚙️ Team names (5 teams)</div>
-      <div class="admin-grid" style="margin-bottom:8px">
-        <div class="admin-field"><label>Team A</label><input type="text" id="admin-nameA" placeholder="Fellowship A"></div>
-        <div class="admin-field"><label>Team B</label><input type="text" id="admin-nameB" placeholder="Fellowship B"></div>
-        <div class="admin-field"><label>Team C</label><input type="text" id="admin-nameC" placeholder="Fellowship C"></div>
-        <div class="admin-field"><label>Team D</label><input type="text" id="admin-nameD" placeholder="Fellowship D"></div>
-      </div>
-      <div class="admin-grid" style="margin-bottom:12px">
-        <div class="admin-field"><label>Team E</label><input type="text" id="admin-nameE" placeholder="Fellowship E"></div>
-      </div>
-      <div class="admin-grid" style="margin-bottom:12px">
-        <div class="admin-field"><label>Mix 1</label><input type="text" id="admin-nameM1" placeholder="Mix 1"></div>
-        <div class="admin-field"><label>Mix 2</label><input type="text" id="admin-nameM2" placeholder="Mix 2"></div>
-        <div class="admin-field"><label>Mix 3</label><input type="text" id="admin-nameM3" placeholder="Mix 3"></div>
-        <div class="admin-field"><label>Mix 4</label><input type="text" id="admin-nameM4" placeholder="Mix 4"></div>
-      </div>
-      <button class="btn btn-gold" style="width:100%" onclick="saveTeamNames()">💾 Save team names</button>
+
+    <div class="admin-sub-tabs">
+      <button class="admin-sub-tab active" data-sub="teams">Teams</button>
+      <button class="admin-sub-tab" data-sub="scores">Scores</button>
+      <button class="admin-sub-tab" data-sub="players">Players</button>
+      <button class="admin-sub-tab" data-sub="gallery">Gallery</button>
+      <button class="admin-sub-tab" data-sub="history">History</button>
+      <button class="admin-sub-tab" data-sub="rules">Rules/Content</button>
     </div>
-    <div class="card">
-      <div class="card-label">💰 Budget — admin only</div>
-      <div class="rule-row"><span class="rule-icon">🏟</span><div class="rule-text editable" contenteditable="false" data-key="budget_1">2x 5v5 courts × 2hrs — <strong>$320</strong></div></div>
-      <div class="rule-row"><span class="rule-icon">🎁</span><div class="rule-text editable" contenteditable="false" data-key="budget_2">Grab voucher prizes — <strong>$230</strong></div></div>
-      <div class="rule-row"><span class="rule-icon">🍱</span><div class="rule-text editable" contenteditable="false" data-key="budget_3">Food & drinks — <strong>$200</strong></div></div>
-      <div class="rule-row"><span class="rule-icon">💵</span><div class="rule-text editable" contenteditable="false" data-key="budget_4">Total <strong>$750</strong> · Split 5 fellowships = <strong>$150 each</strong></div></div>
-    </div>
-    <div class="card">
-      <div class="card-label">⚽ Update scores</div>
-      <div class="section-divider">SLC Cup — Round Robin</div>
-      <div id="admin-rr"></div>
-      <div class="section-divider" style="margin-top:12px">SLC Cup — Final</div>
-      <div id="admin-ko"></div>
-      <div class="section-divider" style="margin-top:12px">🔀 Mixed Cup</div>
-      <div id="admin-mixed"></div>
-    </div>
-    <div class="card">
-      <div class="card-label">👟 Golden Boot — manage scorers</div>
-      <div style="display:flex;gap:8px;margin-bottom:12px">
-        <select id="admin-gb-team" style="flex:0 0 100px;padding:8px 6px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:12px;background:var(--surface2);color:var(--text);outline:none;"></select>
-        <input type="text" id="admin-gb-name" placeholder="Player name" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--surface2);color:var(--text);outline:none;">
-        <button class="btn btn-gold" onclick="addScorer()">Add</button>
+
+    <div class="admin-sub-content active" id="sub-teams">
+      <div class="card">
+        <div class="card-label">⚙️ Team names (5 teams)</div>
+        <div class="admin-grid" style="margin-bottom:8px">
+          <div class="admin-field"><label>Team A</label><input type="text" id="admin-nameA" placeholder="Fellowship A"></div>
+          <div class="admin-field"><label>Team B</label><input type="text" id="admin-nameB" placeholder="Fellowship B"></div>
+          <div class="admin-field"><label>Team C</label><input type="text" id="admin-nameC" placeholder="Fellowship C"></div>
+          <div class="admin-field"><label>Team D</label><input type="text" id="admin-nameD" placeholder="Fellowship D"></div>
+        </div>
+        <div class="admin-grid" style="margin-bottom:12px">
+          <div class="admin-field"><label>Team E</label><input type="text" id="admin-nameE" placeholder="Fellowship E"></div>
+        </div>
+        <button class="btn btn-gold" style="width:100%" onclick="saveTeamNames()">💾 Save team names</button>
       </div>
-      <div id="admin-boot-list"><div class="empty-state">No scorers added yet</div></div>
     </div>
-    <div class="card">
-      <div class="card-label">👥 Player list — manage roster</div>
-      <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Add players and assign them to a team. Change their team anytime for transfers.</p>
-      <div style="display:flex;gap:8px;margin-bottom:12px">
-        <select id="admin-player-team" style="flex:0 0 100px;padding:8px 6px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:12px;background:var(--surface2);color:var(--text);outline:none;"></select>
-        <input type="text" id="admin-player-name" placeholder="Player name" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--surface2);color:var(--text);outline:none;">
-        <button class="btn btn-gold" onclick="addPlayer()">Add</button>
+
+    <div class="admin-sub-content" id="sub-scores">
+      <div class="card">
+        <div class="card-label">⚽ Update scores</div>
+        <div class="section-divider">Round Robin</div>
+        <div id="admin-rr"></div>
+        <div class="section-divider" style="margin-top:12px">Final &amp; 3rd place</div>
+        <div id="admin-ko"></div>
       </div>
-      <div id="admin-players-list"><div class="empty-state">No players added yet</div></div>
+      <div class="card">
+        <div class="card-label">👟 Golden Boot — manage scorers</div>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <select id="admin-gb-team" style="flex:0 0 100px;padding:8px 6px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:12px;background:var(--surface2);color:var(--text);outline:none;"></select>
+          <input type="text" id="admin-gb-name" placeholder="Player name" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--surface2);color:var(--text);outline:none;">
+          <button class="btn btn-gold" onclick="addScorer()">Add</button>
+        </div>
+        <div id="admin-boot-list"><div class="empty-state">No scorers added yet</div></div>
+      </div>
     </div>
+
+    <div class="admin-sub-content" id="sub-players">
+      <div class="card">
+        <div class="card-label">👥 Player list — manage roster</div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Add players and assign them to a team. Change their team anytime for transfers.</p>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <select id="admin-player-team" style="flex:0 0 100px;padding:8px 6px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:12px;background:var(--surface2);color:var(--text);outline:none;"></select>
+          <input type="text" id="admin-player-name" placeholder="Player name" style="flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--surface2);color:var(--text);outline:none;">
+          <button class="btn btn-gold" onclick="addPlayer()">Add</button>
+        </div>
+        <div id="admin-players-list"><div class="empty-state">No players added yet</div></div>
+      </div>
+    </div>
+
+    <div class="admin-sub-content" id="sub-gallery">
+      <div class="card">
+        <div class="card-label">📸 Gallery — add photos</div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Paste an image URL (e.g. from Google Photos share link, Imgur, etc). Right-click an image online and choose "Copy image address" for the direct link.</p>
+        <div class="admin-grid" style="margin-bottom:8px">
+          <div class="admin-field" style="grid-column:span 2;"><label>Image URL</label><input type="text" id="gallery-url" placeholder="https://..."></div>
+        </div>
+        <div class="admin-grid" style="margin-bottom:12px">
+          <div class="admin-field" style="grid-column:span 2;"><label>Caption (optional)</label><input type="text" id="gallery-caption" placeholder="e.g. Champions — Katong & Hope Presbyterian"></div>
+        </div>
+        <button class="btn btn-gold" style="width:100%;margin-bottom:12px" onclick="addPhoto()">➕ Add photo</button>
+        <div id="admin-gallery-list"></div>
+      </div>
+    </div>
+
+    <div class="admin-sub-content" id="sub-history">
+      <div class="card">
+        <div class="card-label">📜 SLC Cup History — add a year's results</div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:10px;">Record the podium and golden boot for this or past years.</p>
+        <div class="admin-grid" style="margin-bottom:8px">
+          <div class="admin-field"><label>Year</label><input type="text" id="hist-year" placeholder="2026"></div>
+          <div class="admin-field"><label>🥇 Champion</label><input type="text" id="hist-1st" placeholder="Team name"></div>
+        </div>
+        <div class="admin-grid" style="margin-bottom:8px">
+          <div class="admin-field"><label>🥈 Runner-up</label><input type="text" id="hist-2nd" placeholder="Team name"></div>
+          <div class="admin-field"><label>🥉 3rd place</label><input type="text" id="hist-3rd" placeholder="Team name"></div>
+        </div>
+        <div class="admin-grid" style="margin-bottom:12px">
+          <div class="admin-field"><label>👟 Golden Boot</label><input type="text" id="hist-boot" placeholder="Player name"></div>
+          <div class="admin-field"><label>Boot's team</label><input type="text" id="hist-boot-team" placeholder="Team name"></div>
+        </div>
+        <button class="btn btn-gold" style="width:100%;margin-bottom:12px" onclick="addHistoryEntry()">💾 Save this year's history</button>
+        <div id="admin-history-list"></div>
+      </div>
+    </div>
+
+    <div class="admin-sub-content" id="sub-rules">
+      <div class="card">
+        <div class="card-label">📋 Rules &amp; regulations (reference only — not shown publicly)</div>
+        <div class="rule-section">
+          <h3>⚽ General rules</h3>
+          <div class="rule-row"><span class="rule-icon">👕</span><div class="rule-text editable" contenteditable="false" data-key="rule_1"><strong>5-a-side</strong> — 5 players on pitch per team. Rolling subs, unlimited.</div></div>
+          <div class="rule-row"><span class="rule-icon">⏱</span><div class="rule-text editable" contenteditable="false" data-key="rule_2"><strong>10-minute games</strong> — straight time, no stoppage time. Referee's whistle is final.</div></div>
+          <div class="rule-row"><span class="rule-icon">👧</span><div class="rule-text editable" contenteditable="false" data-key="rule_3"><strong>Mixed gender</strong> — at least 2 female players on pitch at all times.</div></div>
+          <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text editable" contenteditable="false" data-key="rule_4"><strong>No sliding tackles</strong> — safety first. Sliding = free kick.</div></div>
+          <div class="rule-row"><span class="rule-icon">🚫</span><div class="rule-text editable" contenteditable="false" data-key="rule_5"><strong>No heading</strong> — reduces collision risk on small courts.</div></div>
+          <div class="rule-row"><span class="rule-icon">🦶</span><div class="rule-text editable" contenteditable="false" data-key="rule_6"><strong>Kick-ins</strong> instead of throw-ins. Ball stationary, taken within 5 seconds.</div></div>
+          <div class="rule-row"><span class="rule-icon">🧤</span><div class="rule-text editable" contenteditable="false" data-key="rule_8"><strong>Goalkeeper</strong> — no punting. Rolling or throwing only.</div></div>
+          <div class="rule-row"><span class="rule-icon">🟨</span><div class="rule-text editable" contenteditable="false" data-key="rule_9"><strong>Yellow card</strong> — 2-minute sin bin, team plays short.</div></div>
+          <div class="rule-row"><span class="rule-icon">🟥</span><div class="rule-text editable" contenteditable="false" data-key="rule_10"><strong>Red card</strong> — player out for the rest of the tournament.</div></div>
+        </div>
+        <div class="rule-section">
+          <h3>📊 Points system</h3>
+          <div class="rule-row"><span class="rule-icon">✅</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts1"><strong>Win</strong> = 3 points</div></div>
+          <div class="rule-row"><span class="rule-icon">🤝</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts2"><strong>Draw</strong> = 1 point each</div></div>
+          <div class="rule-row"><span class="rule-icon">📊</span><div class="rule-text editable" contenteditable="false" data-key="rule_pts4"><strong>Tiebreaker:</strong> Goal difference → Goals scored → Head-to-head → Penalty shootout</div></div>
+        </div>
+        <div class="rule-section">
+          <h3>⚡ Penalty shootout (MLS-style)</h3>
+          <div class="rule-row"><span class="rule-icon">🏃</span><div class="rule-text editable" contenteditable="false" data-key="rule_ko2"><strong>MLS-style shootout</strong> — player starts at the 3/4 court line, dribbles in, must shoot before the D line.</div></div>
+          <div class="rule-row"><span class="rule-icon">🎯</span><div class="rule-text editable" contenteditable="false" data-key="rule_ko4"><strong>3 kicks each</strong>, alternating. Sudden death if still level.</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">💰 Budget (admin only)</div>
+        <div class="rule-row"><span class="rule-icon">🏟</span><div class="rule-text editable" contenteditable="false" data-key="budget_1">2x 5v5 courts × 2hrs — <strong>$320</strong></div></div>
+        <div class="rule-row"><span class="rule-icon">🎁</span><div class="rule-text editable" contenteditable="false" data-key="budget_2">Grab voucher prizes — <strong>$230</strong></div></div>
+        <div class="rule-row"><span class="rule-icon">🍱</span><div class="rule-text editable" contenteditable="false" data-key="budget_3">Food & drinks — <strong>$200</strong></div></div>
+        <div class="rule-row"><span class="rule-icon">💵</span><div class="rule-text editable" contenteditable="false" data-key="budget_4">Total <strong>$750</strong></div></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -527,7 +458,6 @@ const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const TEAMS = ['A','B','C','D','E'];
 
-// Correct 5-team round robin (circle method) — 10 matches total, each team plays 4, byes/referees once
 const RR_MATCHES = [
   {id:'r1a',round:1,h:'B',a:'E',court:'C1',time:'2:35pm'},
   {id:'r1b',round:1,h:'C',a:'D',court:'C2',time:'2:35pm'},
@@ -546,18 +476,15 @@ const KO_MATCHES = [
   {id:'final',label:'SLC Cup Final',name:'1st vs 2nd',time:'3:47pm',court:'C1'},
   {id:'tp',label:'3rd place',name:'3rd vs 4th',time:'3:47pm',court:'C2'},
 ];
-const MX_MATCHES = [
-  {id:'msf1',label:'Mixed SF1',time:'4:07pm',court:'C1'},
-  {id:'msf2',label:'Mixed SF2',time:'4:07pm',court:'C2'},
-  {id:'mtp',label:'Mixed 3rd place',time:'4:25pm',court:'C2'},
-  {id:'mfinal',label:'Mixed Cup Final',time:'4:25pm',court:'C1'},
-];
 
 let state = {
-  teams:{A:'Team A',B:'Team B',C:'Team C',D:'Team D',E:'Team E',M1:'Mix 1',M2:'Mix 2',M3:'Mix 3',M4:'Mix 4'},
+  teams:{A:'Team A',B:'Team B',C:'Team C',D:'Team D',E:'Team E'},
   scores:{},
+  penalties:{},
   scorers:[],
   players:[],
+  history:[],
+  gallery:[],
   content:{}
 };
 
@@ -571,6 +498,15 @@ function showPage(id, btn) {
 
 document.querySelectorAll('.nav-tab[data-page]').forEach(btn => {
   btn.addEventListener('click', () => showPage(btn.dataset.page, btn));
+});
+
+document.querySelectorAll('.admin-sub-tab[data-sub]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.admin-sub-content').forEach(c=>c.classList.remove('active'));
+    document.querySelectorAll('.admin-sub-tab').forEach(b=>b.classList.remove('active'));
+    document.getElementById('sub-'+btn.dataset.sub).classList.add('active');
+    btn.classList.add('active');
+  });
 });
 
 window.checkPin = function() {
@@ -589,6 +525,8 @@ function unlockAdmin() {
   renderAdminScores();
   renderAdminBoot();
   renderAdminPlayers();
+  renderAdminHistory();
+  renderAdminGallery();
   loadTeamNamesToAdmin();
   enableInlineEditing();
 }
@@ -652,12 +590,15 @@ function showToast(msg, color='green') {
 }
 
 async function loadData() {
-  const [scoresRes, scorersRes, teamsRes, contentRes, playersRes] = await Promise.all([
+  const [scoresRes, scorersRes, teamsRes, contentRes, playersRes, penaltiesRes, historyRes, galleryRes] = await Promise.all([
     sb.from('scores').select('*'),
     sb.from('scorers').select('*').order('goals',{ascending:false}),
     sb.from('settings').select('*').eq('key','teams').single(),
     sb.from('settings').select('*').eq('key','content').single(),
-    sb.from('players').select('*').order('created_at',{ascending:true})
+    sb.from('players').select('*').order('created_at',{ascending:true}),
+    sb.from('settings').select('*').eq('key','penalties').single(),
+    sb.from('history').select('*').order('year',{ascending:false}),
+    sb.from('gallery').select('*').order('created_at',{ascending:false})
   ]);
   if(scoresRes.data) {
     state.scores = {};
@@ -667,11 +608,16 @@ async function loadData() {
   if(teamsRes.data?.value) state.teams = {...state.teams, ...JSON.parse(teamsRes.data.value)};
   if(contentRes.data?.value) { state.content = JSON.parse(contentRes.data.value); applyContent(state.content); }
   if(playersRes.data) state.players = playersRes.data;
+  if(penaltiesRes.data?.value) state.penalties = JSON.parse(penaltiesRes.data.value);
+  if(historyRes.data) state.history = historyRes.data;
+  if(galleryRes.data) state.gallery = galleryRes.data;
   renderAll();
   loadTeamNamesToAdmin();
   if(document.getElementById('admin-panel')?.style.display === 'block') {
     renderAdminBoot();
     renderAdminPlayers();
+    renderAdminHistory();
+    renderAdminGallery();
   }
 }
 
@@ -689,25 +635,22 @@ window.saveTeamNames = async function() {
     C: document.getElementById('admin-nameC').value || 'Team C',
     D: document.getElementById('admin-nameD').value || 'Team D',
     E: document.getElementById('admin-nameE').value || 'Team E',
-    M1: document.getElementById('admin-nameM1').value || 'Mix 1',
-    M2: document.getElementById('admin-nameM2').value || 'Mix 2',
-    M3: document.getElementById('admin-nameM3').value || 'Mix 3',
-    M4: document.getElementById('admin-nameM4').value || 'Mix 4',
   };
   state.teams = names;
   const {error} = await sb.from('settings').upsert({key:'teams',value:JSON.stringify(names)},{onConflict:'key'});
   if(error) { showToast('Save failed — check Supabase','red'); return; }
   renderAll();
   renderAdminBoot();
+  renderAdminPlayers();
   showToast('Team names saved ✓');
 };
 
 function loadTeamNamesToAdmin() {
   ['A','B','C','D','E'].forEach(t => { const el=document.getElementById('admin-name'+t); if(el) el.value = state.teams[t] || ''; });
-  ['1','2','3','4'].forEach(t => { const el=document.getElementById('admin-nameM'+t); if(el) el.value = state.teams['M'+t] || ''; });
 }
 
 function sc(id) { return state.scores[id] || null; }
+function scPen(id) { return state.penalties?.[id] || null; }
 
 function calcStats() {
   const stats = {};
@@ -740,28 +683,30 @@ function renderAll() {
   renderScores();
   renderTable();
   renderSLCBracket();
-  renderMixedBracket();
   renderBoot();
   renderSchedule();
   renderPlayersPublic();
+  renderHistoryPublic();
+  renderGalleryPublic();
+  renderHomeChampion();
 }
 
-function renderPlayersPublic() {
-  const el = document.getElementById('players-public-list');
-  if(!el) return;
-  if(state.players.length===0){el.innerHTML='<div class="empty-state">No players added yet</div>';return;}
-  const grouped = {};
-  TEAMS.forEach(t=>grouped[t]=[]);
-  state.players.forEach(p => { if(!grouped[p.team]) grouped[p.team]=[]; grouped[p.team].push(p); });
-  let html = '';
-  TEAMS.forEach(t => {
-    const list = grouped[t]||[];
-    html += `<div style="margin-bottom:18px;">
-      <div style="font-size:12px;font-weight:600;color:var(--gold);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);">${tn(t)} <span style="color:var(--muted);font-weight:400;">(${list.length})</span></div>
-      ${list.length===0 ? '<div style="font-size:12px;color:var(--muted);">No players yet</div>' : list.map(p=>`<div style="font-size:13px;padding:5px 0;color:var(--text);">${p.name}</div>`).join('')}
-    </div>`;
-  });
-  el.innerHTML = html;
+function renderHomeChampion() {
+  const stats = calcStats();
+  const ord = sortedTeams(stats);
+  const rrComplete = RR_MATCHES.every(m => sc(m.id) !== null);
+  const fin = sc('final'), tp = sc('tp');
+  const finPen = scPen('final');
+  const card = document.getElementById('home-champion-card');
+  if(!rrComplete || !fin) { card.style.display='none'; return; }
+  let winnerIsHome = null;
+  if(fin.home!==fin.away) winnerIsHome = fin.home>fin.away;
+  else if(finPen && finPen.home!==finPen.away) winnerIsHome = finPen.home>finPen.away;
+  if(winnerIsHome===null){ card.style.display='none'; return; }
+  card.style.display='block';
+  setEl('home-1st', winnerIsHome?tn(ord[0]):tn(ord[1]));
+  setEl('home-2nd', winnerIsHome?tn(ord[1]):tn(ord[0]));
+  setEl('home-3rd', tn(ord[2]));
 }
 
 function renderSchedule() {
@@ -784,30 +729,11 @@ function renderSchedule() {
     }
     tbody.innerHTML = rows;
   }
-
-  const stats = calcStats();
-  const ord = sortedTeams(stats);
-  const rrComplete = RR_MATCHES.every(m => sc(m.id) !== null);
-  if(rrComplete) {
-    setEl2('sch-final-teams', `${tn(ord[0])} vs ${tn(ord[1])}`);
-    setEl2('sch-tp-teams', `${tn(ord[2])} vs ${tn(ord[3])}`);
-  } else {
-    setEl2('sch-final-teams', `TBD`);
-    setEl2('sch-tp-teams', `TBD`);
-  }
-
-  const M1=tn('M1'),M2=tn('M2'),M3=tn('M3'),M4=tn('M4');
-  setEl2('sch-msf1-teams', `<strong>Mixed SF1:</strong> ${M1} vs ${M2}`);
-  setEl2('sch-msf2-teams', `<strong>Mixed SF2:</strong> ${M3} vs ${M4}`);
-  setEl2('sch-mfinal-teams', `<strong>Final:</strong> ${M1}/${M2} winner vs ${M3}/${M4} winner`);
-  setEl2('sch-mtp-teams', `<strong>3rd place:</strong> ${M1}/${M2} loser vs ${M3}/${M4} loser`);
 }
-function setEl2(id,html){const el=document.getElementById(id);if(el)el.innerHTML=html;}
 
 function renderScores() {
   const rrEl = document.getElementById('scores-rr');
   const koEl = document.getElementById('scores-ko');
-  const mxEl = document.getElementById('scores-mixed');
   if(!rrEl) return;
 
   rrEl.innerHTML = RR_MATCHES.map(m => {
@@ -830,33 +756,14 @@ function renderScores() {
     : {final:{h:'TBD',a:'TBD'}, tp:{h:'TBD',a:'TBD'}};
   koEl.innerHTML = KO_MATCHES.map(m => {
     const s = sc(m.id);
+    const pen = scPen(m.id);
     const names = koNames[m.id];
+    const scoreDisp = s ? `<span class="score-num">${s.home}${s.home===s.away&&pen?' ('+pen.home+')':''}</span><span class="score-sep">–</span><span class="score-num">${s.away}${s.home===s.away&&pen?' ('+pen.away+')':''}</span>` : `<span class="score-tbd">vs</span>`;
     return `<div class="match-card">
       <div class="match-header"><span class="match-badge">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span> · ${m.time}</span></div>
       <div class="match-teams">
         <span class="match-team">${names.h}</span>
-        <div class="match-score">${s?`<span class="score-num">${s.home}</span><span class="score-sep">–</span><span class="score-num">${s.away}</span>`:`<span class="score-tbd">vs</span>`}</div>
-        <span class="match-team">${names.a}</span>
-      </div>
-    </div>`;
-  }).join('');
-
-  const mxLabels = {msf1:{h:tn('M1'),a:tn('M2')}, msf2:{h:tn('M3'),a:tn('M4')}};
-  const msf1 = sc('msf1'), msf2 = sc('msf2');
-  const msf1w = msf1&&msf1.home!==msf1.away?(msf1.home>msf1.away?tn('M1'):tn('M2')):null;
-  const msf1l = msf1&&msf1.home!==msf1.away?(msf1.home>msf1.away?tn('M2'):tn('M1')):null;
-  const msf2w = msf2&&msf2.home!==msf2.away?(msf2.home>msf2.away?tn('M3'):tn('M4')):null;
-  const msf2l = msf2&&msf2.home!==msf2.away?(msf2.home>msf2.away?tn('M4'):tn('M3')):null;
-  mxLabels.mtp = {h:msf1l||'SF1 loser',a:msf2l||'SF2 loser'};
-  mxLabels.mfinal = {h:msf1w||'SF1 winner',a:msf2w||'SF2 winner'};
-  mxEl.innerHTML = MX_MATCHES.map(m => {
-    const s = sc(m.id);
-    const names = mxLabels[m.id]||{h:'TBD',a:'TBD'};
-    return `<div class="match-card">
-      <div class="match-header"><span class="match-badge">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span> · ${m.time}</span></div>
-      <div class="match-teams">
-        <span class="match-team">${names.h}</span>
-        <div class="match-score">${s?`<span class="score-num">${s.home}</span><span class="score-sep">–</span><span class="score-num">${s.away}</span>`:`<span class="score-tbd">vs</span>`}</div>
+        <div class="match-score">${scoreDisp}</div>
         <span class="match-team">${names.a}</span>
       </div>
     </div>`;
@@ -892,37 +799,29 @@ function renderSLCBracket() {
   setEl('tpn1',p[2]); setEl('tpn2',p[3]);
 
   const fin=sc('final'), tp=sc('tp');
-  if(rrComplete && fin){setEl('fins1',fin.home);setEl('fins2',fin.away);
-    if(fin.home!==fin.away){setW('fint1','fint2',fin.home>fin.away);const champ=fin.home>fin.away?p[0]:p[1];const b=document.getElementById('slc-banner');b.style.display='block';setEl('slc-champ',champ);}
-    else clrW('fint1','fint2');
+  const finPen=scPen('final'), tpPen=scPen('tp');
+
+  if(rrComplete && fin){
+    setEl('fins1', fin.home + (fin.home===fin.away && finPen ? ` (${finPen.home})` : ''));
+    setEl('fins2', fin.away + (fin.home===fin.away && finPen ? ` (${finPen.away})` : ''));
+    let winnerIsHome = null;
+    if(fin.home!==fin.away) winnerIsHome = fin.home>fin.away;
+    else if(finPen && finPen.home!==finPen.away) winnerIsHome = finPen.home>finPen.away;
+    if(winnerIsHome!==null){
+      setW('fint1','fint2',winnerIsHome);
+      const champ=winnerIsHome?p[0]:p[1];
+      const b=document.getElementById('slc-banner');b.style.display='block';setEl('slc-champ',champ);
+    } else clrW('fint1','fint2');
   } else { setEl('fins1','–'); setEl('fins2','–'); clrW('fint1','fint2'); }
-  if(rrComplete && tp){setEl('tps1',tp.home);setEl('tps2',tp.away);if(tp.home!==tp.away)setW('tpt1','tpt2',tp.home>tp.away);else clrW('tpt1','tpt2');}
-  else { setEl('tps1','–'); setEl('tps2','–'); clrW('tpt1','tpt2'); }
-}
 
-function renderMixedBracket() {
-  const mn = [tn('M1'),tn('M2'),tn('M3'),tn('M4')];
-  setEl('msf1n1',mn[0]);setEl('msf1n2',mn[1]);
-  setEl('msf2n1',mn[2]);setEl('msf2n2',mn[3]);
-
-  const msf1=sc('msf1'),msf2=sc('msf2');
-  let msf1w=null,msf1l=null,msf2w=null,msf2l=null;
-
-  if(msf1){setEl('msf1s1',msf1.home);setEl('msf1s2',msf1.away);}
-  if(msf2){setEl('msf2s1',msf2.home);setEl('msf2s2',msf2.away);}
-
-  if(msf1&&msf1.home!==msf1.away){msf1w=msf1.home>msf1.away?mn[0]:mn[1];msf1l=msf1.home>msf1.away?mn[1]:mn[0];setW('msf1t1','msf1t2',msf1.home>msf1.away);}else clrW('msf1t1','msf1t2');
-  if(msf2&&msf2.home!==msf2.away){msf2w=msf2.home>msf2.away?mn[2]:mn[3];msf2l=msf2.home>msf2.away?mn[3]:mn[2];setW('msf2t1','msf2t2',msf2.home>msf2.away);}else clrW('msf2t1','msf2t2');
-
-  setEl('mtpn1',msf1l||'SF1 loser');setEl('mtpn2',msf2l||'SF2 loser');
-  setEl('mfinn1',msf1w||'SF1 winner');setEl('mfinn2',msf2w||'SF2 winner');
-
-  const mtp=sc('mtp'),mfin=sc('mfinal');
-  if(mtp){setEl('mtps1',mtp.home);setEl('mtps2',mtp.away);if(mtp.home!==mtp.away)setW('mtp1','mtp2',mtp.home>mtp.away);else clrW('mtp1','mtp2');}
-  if(mfin){setEl('mfins1',mfin.home);setEl('mfins2',mfin.away);
-    if(mfin.home!==mfin.away){setW('mfin1','mfin2',mfin.home>mfin.away);const champ=mfin.home>mfin.away?msf1w:msf2w;if(champ){const b=document.getElementById('mixed-banner');b.style.display='block';setEl('mixed-champ',champ);}}
-    else clrW('mfin1','mfin2');
-  }
+  if(rrComplete && tp){
+    setEl('tps1', tp.home + (tp.home===tp.away && tpPen ? ` (${tpPen.home})` : ''));
+    setEl('tps2', tp.away + (tp.home===tp.away && tpPen ? ` (${tpPen.away})` : ''));
+    let winnerIsHome = null;
+    if(tp.home!==tp.away) winnerIsHome = tp.home>tp.away;
+    else if(tpPen && tpPen.home!==tpPen.away) winnerIsHome = tpPen.home>tpPen.away;
+    if(winnerIsHome!==null) setW('tpt1','tpt2',winnerIsHome); else clrW('tpt1','tpt2');
+  } else { setEl('tps1','–'); setEl('tps2','–'); clrW('tpt1','tpt2'); }
 }
 
 function renderBoot() {
@@ -945,12 +844,42 @@ function renderBoot() {
   }).join('');
 }
 
+function renderPlayersPublic() {
+  // players are managed but not shown as separate public tab now — folded into admin only per simplification
+}
+
+function renderHistoryPublic() {
+  const el = document.getElementById('history-public-list');
+  if(!el) return;
+  if(state.history.length===0){el.innerHTML='<div class="empty-state">No history recorded yet</div>';return;}
+  el.innerHTML = state.history.map(h => `
+    <div style="margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border);">
+      <div style="font-size:16px;font-weight:700;color:var(--gold);margin-bottom:10px;">${h.year}</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        ${h.champion ? `<div style="font-size:13px;"><span style="font-size:15px;">🥇</span> <strong>${h.champion}</strong> <span style="color:var(--muted);">— Champion</span></div>` : ''}
+        ${h.runner_up ? `<div style="font-size:13px;"><span style="font-size:15px;">🥈</span> ${h.runner_up} <span style="color:var(--muted);">— Runner-up</span></div>` : ''}
+        ${h.third_place ? `<div style="font-size:13px;"><span style="font-size:15px;">🥉</span> ${h.third_place} <span style="color:var(--muted);">— 3rd place</span></div>` : ''}
+        ${h.golden_boot ? `<div style="font-size:13px;"><span style="font-size:15px;">👟</span> <strong>${h.golden_boot}</strong>${h.golden_boot_team?' ('+h.golden_boot_team+')':''} <span style="color:var(--muted);">— Golden Boot</span></div>` : ''}
+      </div>
+    </div>`).join('');
+}
+
+function renderGalleryPublic() {
+  const el = document.getElementById('gallery-public-grid');
+  if(!el) return;
+  if(state.gallery.length===0){el.innerHTML='<div class="empty-state">No photos yet — check back soon!</div>';return;}
+  el.innerHTML = `<div class="gallery-grid">` + state.gallery.map(g => `
+    <div class="gallery-item">
+      <img src="${g.url}" loading="lazy" alt="${g.caption||'SLC Cup photo'}">
+      ${g.caption ? `<div class="cap">${g.caption}</div>` : ''}
+    </div>`).join('') + `</div>`;
+}
+
 function renderAdminScores() {
   const stats = calcStats();
   const ord = sortedTeams(stats);
   const rrEl = document.getElementById('admin-rr');
   const koEl = document.getElementById('admin-ko');
-  const mxEl = document.getElementById('admin-mixed');
   if(!rrEl) return;
 
   rrEl.innerHTML = RR_MATCHES.map(m => {
@@ -970,8 +899,10 @@ function renderAdminScores() {
   const koNames = rrComplete2
     ? {final:{h:tn(ord[0]),a:tn(ord[1])}, tp:{h:tn(ord[2]),a:tn(ord[3])}}
     : {final:{h:'TBD (finish round robin)',a:'TBD'}, tp:{h:'TBD (finish round robin)',a:'TBD'}};
+
   koEl.innerHTML = KO_MATCHES.map(m => {
     const s=sc(m.id);
+    const pen=scPen(m.id);
     const names=koNames[m.id];
     return `<div class="match-admin">
       <div class="match-admin-header">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span></div>
@@ -981,25 +912,10 @@ function renderAdminScores() {
         <span class="match-admin-team">${names.a}</span>
         <button class="save-btn" onclick="saveMatchScore('${m.id}')">Save</button>
       </div>
-    </div>`;
-  }).join('');
-
-  const msf1=sc('msf1'),msf2=sc('msf2');
-  const mxLabels={
-    msf1:{h:tn('M1'),a:tn('M2')}, msf2:{h:tn('M3'),a:tn('M4')},
-    mtp:{h:msf1&&msf1.home!==msf1.away?(msf1.home>msf1.away?tn('M2'):tn('M1')):'SF1 loser',a:msf2&&msf2.home!==msf2.away?(msf2.home>msf2.away?tn('M4'):tn('M3')):'SF2 loser'},
-    mfinal:{h:msf1&&msf1.home!==msf1.away?(msf1.home>msf1.away?tn('M1'):tn('M2')):'SF1 winner',a:msf2&&msf2.home!==msf2.away?(msf2.home>msf2.away?tn('M3'):tn('M4')):'SF2 winner'},
-  };
-  mxEl.innerHTML = MX_MATCHES.map(m => {
-    const s=sc(m.id);
-    const names=mxLabels[m.id]||{h:'TBD',a:'TBD'};
-    return `<div class="match-admin">
-      <div class="match-admin-header">${m.label} <span class="court-pill ${m.court==='C1'?'c1':'c2'}">${m.court}</span></div>
-      <div class="match-admin-teams">
-        <span class="match-admin-team">${names.h}</span>
-        <div class="score-inputs"><input type="number" min="0" id="as_${m.id}_h" value="${s?s.home:''}" placeholder="0"><span>–</span><input type="number" min="0" id="as_${m.id}_a" value="${s?s.away:''}" placeholder="0"></div>
-        <span class="match-admin-team">${names.a}</span>
-        <button class="save-btn" onclick="saveMatchScore('${m.id}')">Save</button>
+      <div class="admin-row-controls" style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--border);">
+        <span style="font-size:11px;color:var(--muted);">If drawn — penalties:</span>
+        <div class="score-inputs"><input type="number" min="0" id="pen_${m.id}_h" value="${pen?pen.home:''}" placeholder="0" style="width:34px;height:30px;"><span>–</span><input type="number" min="0" id="pen_${m.id}_a" value="${pen?pen.away:''}" placeholder="0" style="width:34px;height:30px;"></div>
+        <button class="save-btn" style="background:var(--surface2);color:var(--text);border:1px solid var(--border)" onclick="savePenalty('${m.id}')">Save pens</button>
       </div>
     </div>`;
   }).join('');
@@ -1027,12 +943,72 @@ function renderAdminBoot() {
     </div>`).join('');
 }
 
+function renderAdminPlayers() {
+  const sel = document.getElementById('admin-player-team');
+  if(sel) sel.innerHTML = TEAMS.map(t=>`<option value="${t}">${tn(t)}</option>`).join('');
+  const list = document.getElementById('admin-players-list');
+  if(!list) return;
+  if(state.players.length===0){list.innerHTML='<div class="empty-state">No players added yet</div>';return;}
+  list.innerHTML = state.players.map(p=>`
+    <div class="match-admin" style="margin-bottom:6px">
+      <div class="match-admin-teams">
+        <span class="match-admin-team" style="text-align:left;flex:1.5">${p.name}</span>
+        <select id="pteam_${p.id}" style="flex:0 0 90px;padding:6px 4px;border:1px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--text);font-size:12px;">
+          ${TEAMS.map(t=>`<option value="${t}" ${t===p.team?'selected':''}>${tn(t)}</option>`).join('')}
+        </select>
+        <button class="save-btn" onclick="movePlayer('${p.id}')">Save</button>
+        <button class="save-btn" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red);margin-left:4px" onclick="deletePlayer('${p.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderAdminHistory() {
+  const el = document.getElementById('admin-history-list');
+  if(!el) return;
+  if(state.history.length===0){el.innerHTML='<div class="empty-state">No history entries yet</div>';return;}
+  el.innerHTML = state.history.map(h => `
+    <div class="match-admin" style="margin-bottom:6px">
+      <div class="match-admin-teams">
+        <span class="match-admin-team" style="text-align:left;flex:1;font-weight:600;color:var(--gold);">${h.year}</span>
+        <span style="font-size:11px;color:var(--muted);flex:2;text-align:left;">🥇${h.champion||'–'} · 🥈${h.runner_up||'–'} · 🥉${h.third_place||'–'} · 👟${h.golden_boot||'–'}</span>
+        <button class="save-btn" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red);" onclick="deleteHistoryEntry('${h.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderAdminGallery() {
+  const el = document.getElementById('admin-gallery-list');
+  if(!el) return;
+  if(state.gallery.length===0){el.innerHTML='<div class="empty-state">No photos added yet</div>';return;}
+  el.innerHTML = state.gallery.map(g=>`
+    <div class="match-admin" style="margin-bottom:6px">
+      <div class="match-admin-teams">
+        <span class="match-admin-team" style="text-align:left;flex:1;font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${g.caption||g.url}</span>
+        <button class="save-btn" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red);" onclick="deletePhoto('${g.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
 window.saveMatchScore = async function(matchId) {
   const h = parseInt(document.getElementById('as_'+matchId+'_h').value);
   const a = parseInt(document.getElementById('as_'+matchId+'_a').value);
   if(isNaN(h)||isNaN(a)){showToast('Enter both scores','red');return;}
   await saveScore(matchId, h, a);
   renderAdminScores();
+};
+
+window.savePenalty = async function(matchId) {
+  const h = parseInt(document.getElementById('pen_'+matchId+'_h').value);
+  const a = parseInt(document.getElementById('pen_'+matchId+'_a').value);
+  if(isNaN(h)||isNaN(a)){showToast('Enter both penalty scores','red');return;}
+  if(h===a){showToast('Penalties cannot be tied','red');return;}
+  const merged = {...(state.penalties||{}), [matchId]:{home:h,away:a}};
+  const {error} = await sb.from('settings').upsert({key:'penalties', value:JSON.stringify(merged)},{onConflict:'key'});
+  if(error){showToast('Save failed','red');return;}
+  state.penalties = merged;
+  renderAll();
+  renderAdminScores();
+  showToast('Penalty result saved ✓');
 };
 
 window.addScorer = async function() {
@@ -1065,25 +1041,6 @@ window.deleteScorer = async function(id) {
   renderBoot();renderAdminBoot();showToast('Removed');
 };
 
-function renderAdminPlayers() {
-  const sel = document.getElementById('admin-player-team');
-  if(sel) sel.innerHTML = TEAMS.map(t=>`<option value="${t}">${tn(t)}</option>`).join('');
-  const list = document.getElementById('admin-players-list');
-  if(!list) return;
-  if(state.players.length===0){list.innerHTML='<div class="empty-state">No players added yet</div>';return;}
-  list.innerHTML = state.players.map(p=>`
-    <div class="match-admin" style="margin-bottom:6px">
-      <div class="match-admin-teams">
-        <span class="match-admin-team" style="text-align:left;flex:1.5">${p.name}</span>
-        <select id="pteam_${p.id}" style="flex:0 0 90px;padding:6px 4px;border:1px solid var(--border);border-radius:var(--rs);background:var(--surface);color:var(--text);font-size:12px;">
-          ${TEAMS.map(t=>`<option value="${t}" ${t===p.team?'selected':''}>${tn(t)}</option>`).join('')}
-        </select>
-        <button class="save-btn" onclick="movePlayer('${p.id}')">Save</button>
-        <button class="save-btn" style="background:var(--red-bg);color:var(--red);border:1px solid var(--red);margin-left:4px" onclick="deletePlayer('${p.id}')">✕</button>
-      </div>
-    </div>`).join('');
-}
-
 window.addPlayer = async function() {
   const name = document.getElementById('admin-player-name').value.trim();
   const team = document.getElementById('admin-player-team').value;
@@ -1109,12 +1066,78 @@ window.deletePlayer = async function(id) {
   renderPlayersPublic();renderAdminPlayers();showToast('Removed');
 };
 
+window.addHistoryEntry = async function() {
+  const year = document.getElementById('hist-year').value.trim();
+  const champion = document.getElementById('hist-1st').value.trim();
+  const runner_up = document.getElementById('hist-2nd').value.trim();
+  const third_place = document.getElementById('hist-3rd').value.trim();
+  const golden_boot = document.getElementById('hist-boot').value.trim();
+  const golden_boot_team = document.getElementById('hist-boot-team').value.trim();
+  if(!year){showToast('Enter a year','red');return;}
+  const {data,error} = await sb.from('history').insert({year,champion,runner_up,third_place,golden_boot,golden_boot_team}).select().single();
+  if(error){showToast('Save failed — check Supabase','red');return;}
+  if(data){
+    state.history.unshift(data);
+    ['hist-year','hist-1st','hist-2nd','hist-3rd','hist-boot','hist-boot-team'].forEach(id=>document.getElementById(id).value='');
+  }
+  renderHistoryPublic();renderAdminHistory();showToast('History saved ✓');
+};
+
+window.deleteHistoryEntry = async function(id) {
+  await sb.from('history').delete().eq('id',id);
+  state.history = state.history.filter(x=>x.id!==id);
+  renderHistoryPublic();renderAdminHistory();showToast('Removed');
+};
+
+window.addPhoto = async function() {
+  const url = document.getElementById('gallery-url').value.trim();
+  const caption = document.getElementById('gallery-caption').value.trim();
+  if(!url){showToast('Paste an image URL','red');return;}
+  const {data,error} = await sb.from('gallery').insert({url,caption}).select().single();
+  if(error){showToast('Save failed — check Supabase','red');return;}
+  if(data){
+    state.gallery.unshift(data);
+    document.getElementById('gallery-url').value='';
+    document.getElementById('gallery-caption').value='';
+  }
+  renderGalleryPublic();renderAdminGallery();showToast('Photo added ✓');
+};
+
+window.deletePhoto = async function(id) {
+  await sb.from('gallery').delete().eq('id',id);
+  state.gallery = state.gallery.filter(x=>x.id!==id);
+  renderGalleryPublic();renderAdminGallery();showToast('Removed');
+};
+
 sb.channel('scores').on('postgres_changes',{event:'*',schema:'public',table:'scores'},()=>loadData()).subscribe();
 sb.channel('scorers').on('postgres_changes',{event:'*',schema:'public',table:'scorers'},()=>loadData()).subscribe();
 sb.channel('players').on('postgres_changes',{event:'*',schema:'public',table:'players'},()=>loadData()).subscribe();
+sb.channel('history').on('postgres_changes',{event:'*',schema:'public',table:'history'},()=>loadData()).subscribe();
+sb.channel('gallery').on('postgres_changes',{event:'*',schema:'public',table:'gallery'},()=>loadData()).subscribe();
+
+async function trackView() {
+  if(sessionStorage.getItem('slc_view_counted')==='1') {
+    showViewCount();
+    return;
+  }
+  sessionStorage.setItem('slc_view_counted','1');
+  const {data} = await sb.from('settings').select('*').eq('key','view_count').single();
+  const current = data?.value ? parseInt(data.value) : 0;
+  const next = current + 1;
+  await sb.from('settings').upsert({key:'view_count', value:String(next)},{onConflict:'key'});
+  const el = document.getElementById('view-count');
+  if(el) el.textContent = next;
+}
+
+async function showViewCount() {
+  const {data} = await sb.from('settings').select('*').eq('key','view_count').single();
+  const el = document.getElementById('view-count');
+  if(el) el.textContent = data?.value ? data.value : '0';
+}
 
 loadData().then(() => {
   if(sessionStorage.getItem('slc_admin')==='1') { unlockAdmin(); }
+  trackView();
 });
 </script>
 </body>
